@@ -143,18 +143,18 @@ const Contact = ({}) => {
                 </div>
               </div> */}
               <div className="flex items-center justify-start gap-4">
-                <Link
+                {/* <Link
                   href={"https://www.instagram.com/istanbulgrillculcheth/"}
                   target="_blank"
                 >
                   <Icons.instagram className="text-[#9C9E9F]" />
-                </Link>
-                <Link
+                </Link> */}
+                {/* <Link
                   href={"https://www.facebook.com/istanbulgrillculcheth/"}
                   target="_blank"
                 >
                   <Icons.facebook className="text-[#9C9E9F]" />
-                </Link>
+                </Link> */}
                 <Link href={"https://g.co/kgs/KBMNsyS"} target="_blank">
                   <Icons.google className="text-[#9C9E9F]" />
                 </Link>

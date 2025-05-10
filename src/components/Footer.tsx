@@ -99,7 +99,7 @@ const Footer = ({}) => {
               </Link> */}
 
               <div className="flex flex-row items-center gap-3 pt-8">
-                <Link
+                {/* <Link
                   href={"https://www.instagram.com/istanbulgrillculcheth/"}
                   target="_blank"
                 >
@@ -112,7 +112,7 @@ const Footer = ({}) => {
                 >
                   {" "}
                   <Icons.facebook className="[color:var(--text-light,#FBEAD2)]" />
-                </Link>
+                </Link> */}
                 <Link href={"https://g.co/kgs/KBMNsyS"} target="_blank">
                   {" "}
                   <Icons.google className="[color:var(--text-light,#FBEAD2)]" />
@@ -249,7 +249,7 @@ const Footer = ({}) => {
               </Link> */}
 
               <div className="flex flex-row items-center gap-3 pt-8">
-                <Link
+                {/* <Link
                   href={"https://www.instagram.com/360kebab/"}
                   target="_blank"
                 >
@@ -264,7 +264,7 @@ const Footer = ({}) => {
                 >
                   {" "}
                   <Icons.facebook className="[color:var(--text-light,#FBEAD2)]" />
-                </Link>
+                </Link> */}
                 <Link href={"https://g.co/kgs/KBMNsyS"} target="_blank">
                   {" "}
                   <Icons.google className="[color:var(--text-light,#FBEAD2)]" />

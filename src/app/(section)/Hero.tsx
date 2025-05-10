@@ -56,10 +56,7 @@ const Hero: React.FC = () => {
         className="absolute left-0 top-0 h-full w-full object-cover"
         poster="https://d8q1b3smcycac.cloudfront.net/bradshaw/bradshaw-thumbnail.png"
       >
-        <source
-          src="https://d8q1b3smcycac.cloudfront.net/bradshaw/bradshaw-web.mp4"
-          type="video/mp4"
-        />
+        <source src="/video/bg.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
       <div className="absolute inset-0 bg-black/60" />
@@ -86,6 +83,24 @@ const Hero: React.FC = () => {
               </motion.span>
             ))}
         </h1>
+        <motion.div
+          className="flex flex-col items-center justify-center gap-3 md:flex-row"
+          initial={{ opacity: 0, y: 100 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
+        >
+          <Link href={"/table-booking"}>
+            <Button className="relative z-40 flex items-center justify-center gap-3 rounded-none bg-[#CDAE64] px-6 py-6 font-manrope text-sm font-[600] uppercase text-black hover:bg-[#c3a96c] md:px-5 md:py-6">
+              Book Now
+            </Button>
+          </Link>
+          <Link href={"/menu"}>
+            <Button className="relative z-40 flex items-center justify-center gap-3 rounded-none bg-[#CDAE64] px-6 py-6 font-manrope text-sm font-[600] uppercase text-black hover:bg-[#c3a96c] md:px-5 md:py-6">
+              Order Now
+            </Button>
+          </Link>
+        </motion.div>
       </div>
     </section>
   );
