@@ -41,18 +41,18 @@ const Reserve: React.FC = () => {
             RESERVE TABLE
           </h1>
           <p className="max-w-[500px] font-manrope text-sm font-[300] text-[#C1B6A6] md:text-base">
-            At Layla, our private and group dining options create an intimate
-            setting perfect for any occasion, from joyous celebrations to
+            At Layla, our private and group dining options offer an intimate
+            setting ideal for any occasion — from joyful celebrations to
             meaningful business gatherings. Each space is thoughtfully designed
-            to offer warmth, privacy, and comfort, allowing you and your guests
-            to savor every moment. With personalized service and curated menus
-            inspired by the rich flavors of Lebanon and Syria, we ensure a
+            to provide warmth, privacy, and comfort, allowing you and your
+            guests to savor every moment. With personalized service and curated
+            menus inspired by the rich culinary traditions of Syria, we ensure a
             seamless and memorable dining experience for groups of all sizes.
           </p>
           <div>
             <Link href={"/table-booking"}>
               <Button className="relative z-40 flex flex-row items-center justify-center gap-1 rounded-none bg-transparent px-6 py-6 font-manrope text-sm font-[600] uppercase text-white ring-1 ring-[#D5A859] hover:bg-[#c3a96c] md:px-5 md:py-6">
-                Book NOW <ArrowRight className="text-[#D5A859]" />
+                Book Now <ArrowRight className="text-[#D5A859]" />
               </Button>
             </Link>
           </div>

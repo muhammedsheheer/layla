@@ -60,7 +60,7 @@ const Follow: React.FC = () => {
                 alt="logo"
                 className="w-12"
               /> */}
-              <Link href={""}>
+              {/* <Link href={""}>
                 <Icons.instagram className="z-40 h-24 w-24 text-[#E2B583]" />
               </Link>
               <div>
@@ -69,9 +69,13 @@ const Follow: React.FC = () => {
                   target="_blank"
                   className="text-md text-center font-open_sans font-[400] uppercase text-[#E2B583] md:text-xl"
                 >
-                  @istanbulgrillculcheth
+                  layla
                 </Link>
-              </div>
+              </div> */}
+              <Icons.instagram className="z-40 h-24 w-24 text-[#E2B583]" />
+              <span className="text-md text-center font-open_sans font-[400] uppercase text-[#E2B583] md:text-xl">
+                layla
+              </span>
             </motion.div>
             <div className="w-full md:w-[25%]">
               {" "}
@@ -197,7 +201,7 @@ const Follow: React.FC = () => {
                 alt="logo"
                 className="w-12"
               /> */}
-              <Link href={""}>
+              {/* <Link href={""}>
                 <Icons.instagram className="h-24 w-24 text-[#E2B583]" />
               </Link>
               <div>
@@ -206,9 +210,13 @@ const Follow: React.FC = () => {
                   target="_blank"
                   className="text-center font-open_sans text-xs font-[400] uppercase text-[#E2B583] md:text-xl"
                 >
-                  @istanbulgrillculcheth
+                  layla
                 </Link>
-              </div>
+              </div> */}
+              <Icons.instagram className="z-40 h-24 w-24 text-[#E2B583]" />
+              <span className="text-md text-center font-open_sans font-[400] uppercase text-[#E2B583] md:text-xl">
+                layla
+              </span>
             </motion.div>
             <div className="w-full md:w-[25%]">
               {" "}

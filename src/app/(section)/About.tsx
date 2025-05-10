@@ -69,13 +69,13 @@ function About() {
         >
           <p className="z-40 max-w-[400px] font-inter text-sm font-[400] text-[#7E6C53] md:text-base">
             At Layla, our menu is a heartfelt tribute to the rich culinary
-            traditions of Lebanon and Syria. Every dish is crafted with
-            authenticity, care, and a deep passion for Middle Eastern flavors.
-            Our skilled chefs bring generations of heritage to the table, using
-            the freshest local ingredients to create meals that are both vibrant
-            and soulful. We invite you to experience the warmth, hospitality,
-            and unforgettable tastes of Layla — where every plate tells a story
-            of love and tradition.
+            heritage of Syria. Every dish is thoughtfully prepared with
+            authenticity, care, and a deep love for traditional Syrian flavors.
+            Our talented chefs carry forward generations of Syrian cooking,
+            using the freshest local ingredients to craft meals that are both
+            vibrant and soulful. We invite you to experience the warmth,
+            hospitality, and unforgettable tastes of Layla — where every plate
+            tells a story of Syria’s culture, love, and timeless tradition.
           </p>
           <div className="flex flex-col gap-3">
             <p className="max-w-[400px] font-inter text-sm font-[400] text-[#7E6C53] md:text-base">
