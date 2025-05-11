@@ -78,10 +78,16 @@ const Footer = ({}) => {
                 Contact
               </h6>
               <Link
-                href="tel: +441925871664"
+                href="tel: 01925871664"
                 className="font-manrope text-sm font-[400] [color:var(--text-light,#FBEAD2)]"
               >
-                +44 1925 871664
+                01925871664
+              </Link>
+                 <Link
+                href="mailto: Laylarestaurantuk@gmail.com"
+                className="font-manrope text-sm font-[400] [color:var(--text-light,#FBEAD2)]"
+              >
+               Laylarestaurantuk@gmail.com
               </Link>
               <Link
                 href="https://g.co/kgs/KBMNsyS"

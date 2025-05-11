@@ -120,14 +120,14 @@ const Contact = ({}) => {
                 </div>
                 <div className="flex flex-col gap-4">
                   <Link
-                    href="tel: +441925871664"
+                    href="tel: 01925871664"
                     className="font-poppins text-[#9C9E9F]"
                   >
-                    +44 1925 871664
+                    01925871664
                   </Link>
                 </div>
               </div>
-              {/* <div className="flex items-center gap-6">
+              <div className="flex items-center gap-6">
                 <div>
                   <div className="h-fit w-fit rounded-full p-2">
                     <Mail className="text-[#9C9E9F]" />
@@ -136,12 +136,12 @@ const Contact = ({}) => {
                 <div className="flex flex-col gap-4">
                   <Link
                     className="font-poppins text-[#9C9E9F]"
-                    href={"mailto:bradshawgrill122@gmail.com"}
+                    href={"mailto:Laylarestaurantuk@gmail.com"}
                   >
-                    bradshawgrill122@gmail.com
+                    Laylarestaurantuk@gmail.com
                   </Link>
                 </div>
-              </div> */}
+              </div>
               <div className="flex items-center justify-start gap-4">
                 {/* <Link
                   href={"https://www.instagram.com/istanbulgrillculcheth/"}
