@@ -24,7 +24,7 @@ export default function HomePage() {
         <Story />
         <Special />
         <Reserve />
-        <Reviews />
+        {/* <Reviews /> */}
         <Gallery />
         <Follow />
         <Footer />
