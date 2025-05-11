@@ -321,7 +321,7 @@ const Footer = ({}) => {
 
             <Link href={"https://foodo.ai/"} target="_blank">
               <span className="font-manrope text-sm font-[400] tracking-[0.96px] text-[#64615C]">
-                Powerd by fodo{" "}
+                Powered by Foodo{" "}
               </span>
             </Link>
           </div>
