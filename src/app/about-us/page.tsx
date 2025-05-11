@@ -1,7 +1,6 @@
 import BavetteStory from "@/app/about-us/(section)/BavetteStory";
 import Hero from "@/app/about-us/(section)/Hero";
 import JoinUs from "@/app/about-us/(section)/JoinUs";
-import Review from "@/app/about-us/(section)/Review";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 
@@ -13,7 +12,7 @@ const page = ({}) => {
         <Hero />
         <BavetteStory />
         <JoinUs />
-        <Review />
+        {/* <Review /> */}
         <Footer />
       </div>
     </main>

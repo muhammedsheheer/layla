@@ -9,11 +9,11 @@ const JoinUs = ({}) => {
     <section
       className="relative flex h-screen w-full items-center justify-center"
       style={{
-        backgroundImage: `url('/images/about-us/4.jpg')`,
+        backgroundImage: `url('/images/about-us/about3.png')`,
         backgroundSize: "cover",
       }}
     >
-      <div className="absolute inset-0 bg-black/50" />
+      <div className="absolute inset-0" />
       <div className="z-10 flex h-full w-full flex-col-reverse items-center justify-center gap-4 md:flex-row">
         <motion.div
           className="flex h-full w-full flex-col items-center justify-center gap-[2.5rem] p-6"

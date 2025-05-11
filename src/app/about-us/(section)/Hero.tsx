@@ -33,13 +33,24 @@ const Hero = ({}) => {
               </p>
             </div>
           </motion.div>
-          <div className="flex w-full flex-col items-center justify-center gap-6 md:mt-16 lg:w-1/2">
-            <motion.img
-              src="/images/about-us/2.jpg"
-              width={951}
-              height={975}
+          <div className="flex w-full items-start justify-center gap-3 md:mt-16 lg:w-1/2">
+            {/* <motion.img
+              src="/images/about-us/about1.jpg"
+              width={500}
+              height={1000}
               alt="hero"
-              className="h-full max-h-[600px] w-full object-cover"
+              className="h-full max-h-[600px] w-full object-contain"
+              initial={{ opacity: 0, y: 50, scale: 0.8 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: false, amount: 0.5 }}
+              transition={{ duration: 1.5, ease: "easeOut" }}
+            /> */}
+                 <motion.img
+              src="/images/about-us/about4.jpg"
+              width={500}
+              height={500}
+              alt="hero"
+              className="h-full max-h-[600px] w-full object-contain"
               initial={{ opacity: 0, y: 50, scale: 0.8 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: false, amount: 0.5 }}

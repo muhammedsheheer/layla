@@ -21,7 +21,7 @@ const BavetteStory = ({}) => {
         <div className="flex h-full w-full flex-col items-center justify-center gap-4 bg-[#000] md:flex-row lg:px-24 lg:py-20">
           <div className="h-full w-full overflow-hidden p-4 md:w-1/2 md:p-0">
             <motion.img
-              src="/images/about-us/3.jpg"
+              src="/images/about-us/about2.jpg"
               width={577}
               height={676}
               alt="private dining"
