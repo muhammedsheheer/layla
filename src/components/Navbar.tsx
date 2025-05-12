@@ -82,7 +82,7 @@ const Navbar = ({
               Menu
             </Link>
 
-            <Link
+            {/* <Link
               href={"/about-us"}
               className={
                 pathname === "/" || pathname === "/table-booking"
@@ -91,9 +91,17 @@ const Navbar = ({
               }
             >
               Our Story
-            </Link>
-            <Link href={"/table-booking"}>
+            </Link> */}
+            {/* <Link href={"/table-booking"}>
               <Button className="relative z-40 flex items-center justify-center gap-3 rounded-none bg-[#CDAE64] px-6 py-6 font-manrope text-sm font-[600] uppercase text-black hover:bg-[#c3a96c] md:px-5 md:py-6">
+                Book Now
+              </Button>
+            </Link> */}
+            <Link href={"/table-booking"}>
+              <Button
+                variant={"imageoutline"}
+                className="hero-button flex items-center justify-center gap-3 px-8 py-7 uppercase text-[#000]"
+              >
                 Book Now
               </Button>
             </Link>

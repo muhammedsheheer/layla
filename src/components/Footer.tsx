@@ -44,13 +44,13 @@ const Footer = ({}) => {
               >
                 <Link href="/">Home</Link>
               </Button>
-              <Button
+              {/* <Button
                 variant="link"
                 className="font-manrope text-base font-[400] tracking-[1px] [color:var(--text-light,#FBEAD2)]"
                 asChild
               >
-                <Link href="/about-us">About</Link>
-              </Button>
+                <Link href="/about-us">Our Story</Link>
+              </Button> */}
               <Button
                 variant="link"
                 className="font-manrope text-base font-[400] tracking-[1px] [color:var(--text-light,#FBEAD2)]"
@@ -81,13 +81,13 @@ const Footer = ({}) => {
                 href="tel: 01925871664"
                 className="font-manrope text-sm font-[400] [color:var(--text-light,#FBEAD2)]"
               >
-                01925871664
+                +44 01925871664
               </Link>
-                 <Link
-                href="mailto: Laylarestaurantuk@gmail.com"
+              <Link
+                href="mailto:info@laylarestaurant.co.uk"
                 className="font-manrope text-sm font-[400] [color:var(--text-light,#FBEAD2)]"
               >
-               Laylarestaurantuk@gmail.com
+                info@laylarestaurant.co.uk
               </Link>
               <Link
                 href="https://g.co/kgs/KBMNsyS"
@@ -155,16 +155,13 @@ const Footer = ({}) => {
                 Opening hours
               </span>
               <span className="font-manrope text-sm font-[400] [color:var(--text-light,#FBEAD2)]">
-                Mon - Wed : 4:30-10PM
+                Mon - Thu : 4 PM-10 PM
               </span>
               <span className="font-manrope text-sm font-[400] [color:var(--text-light,#FBEAD2)]">
-                Thursday : 12-10 PM
+                Fri-Sat : 12 PM-11 PM
               </span>
               <span className="font-manrope text-sm font-[400] [color:var(--text-light,#FBEAD2)]">
-                Fri-Sat : 12-12:00 AM
-              </span>
-              <span className="font-manrope text-sm font-[400] [color:var(--text-light,#FBEAD2)]">
-                Sunday : 12-9:00 PM
+                Sunday : 12 PM-10 PM
               </span>
             </div>
           </div>
@@ -208,13 +205,13 @@ const Footer = ({}) => {
               >
                 <Link href="/">Home</Link>
               </Button>
-              <Button
+              {/* <Button
                 variant="link"
                 className="font-manrope text-base font-[400] tracking-[1px] [color:var(--text-light,#FBEAD2)]"
                 asChild
               >
-                <Link href="/about-us">About</Link>
-              </Button>
+                <Link href="/about-us">Our Story</Link>
+              </Button> */}
               <Button
                 variant="link"
                 className="font-manrope text-base font-[400] tracking-[1px] [color:var(--text-light,#FBEAD2)]"
@@ -241,6 +238,12 @@ const Footer = ({}) => {
                 +44 1925 871664
               </Link>
               <Link
+                href="mailto:info@laylarestaurant.co.uk"
+                className="font-manrope text-sm font-[400] [color:var(--text-light,#FBEAD2)]"
+              >
+                info@laylarestaurant.co.uk
+              </Link>
+              <Link
                 href="https://g.co/kgs/KBMNsyS"
                 target="_blank"
                 className="font-manrope text-sm font-[400] [color:var(--text-light,#FBEAD2)]"
@@ -253,7 +256,6 @@ const Footer = ({}) => {
               >
                 bradshawgrill122@gmail.com
               </Link> */}
-
               <div className="flex flex-row items-center gap-3 pt-8">
                 {/* <Link
                   href={"https://www.instagram.com/360kebab/"}
@@ -287,16 +289,13 @@ const Footer = ({}) => {
               Opening hours
             </span>
             <span className="font-manrope text-sm font-[400] [color:var(--text-light,#FBEAD2)]">
-              Mon - Wed : 4:30-10PM
+              Mon - Thu : 4 PM-10 PM
             </span>
             <span className="font-manrope text-sm font-[400] [color:var(--text-light,#FBEAD2)]">
-              Thursday : 12-10 PM
+              Fri-Sat : 12 PM-11 PM
             </span>
             <span className="font-manrope text-sm font-[400] [color:var(--text-light,#FBEAD2)]">
-              Fri-Sat : 12-12:00 AM
-            </span>
-            <span className="font-manrope text-sm font-[400] [color:var(--text-light,#FBEAD2)]">
-              Sunday : 12-9:00 PM
+              Sunday : 12 PM-10 PM
             </span>
           </div>
           <div className="flex flex-col gap-4 md:gap-8">

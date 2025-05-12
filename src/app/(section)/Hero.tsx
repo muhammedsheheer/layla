@@ -84,19 +84,30 @@ const Hero: React.FC = () => {
             ))}
         </h1>
         <motion.div
-          className="flex flex-col items-center justify-center gap-3 md:flex-row"
+          className="flex flex-row items-center justify-center gap-5 md:flex-row md:gap-8"
           initial={{ opacity: 0, y: 100 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false }}
           transition={{ duration: 1.5, ease: "easeOut" }}
         >
           <Link href={"/table-booking"}>
-            <Button className="relative z-40 flex items-center justify-center gap-3 rounded-none bg-[#CDAE64] px-6 py-6 font-manrope text-sm font-[600] uppercase text-black hover:bg-[#c3a96c] md:px-5 md:py-6">
+            <Button
+              variant={"imageoutline"}
+              className="hero-button flex items-center justify-center gap-3 px-8 py-7 uppercase text-[#000]"
+            >
               Book Now
             </Button>
           </Link>
-          <Link href={"/menu"}>
+          {/* <Link href={"/menu"}>
             <Button className="relative z-40 flex items-center justify-center gap-3 rounded-none bg-[#CDAE64] px-6 py-6 font-manrope text-sm font-[600] uppercase text-black hover:bg-[#c3a96c] md:px-5 md:py-6">
+              Order Now
+            </Button>
+          </Link> */}
+          <Link href="/menu">
+            <Button
+              className="hero-button flex items-center justify-center gap-3 px-8 py-7 uppercase text-[#000]"
+              variant="imageoutline"
+            >
               Order Now
             </Button>
           </Link>
