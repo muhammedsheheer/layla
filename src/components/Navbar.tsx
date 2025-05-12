@@ -61,8 +61,8 @@ const Navbar = ({
             <Link
               href={"/"}
               className={
-                pathname === "/" || pathname === "/table-booking"
-                  ? "pt-4 text-center font-manrope text-sm font-[600] uppercase tracking-[2px] text-[#ffff]"
+                pathname === "/menu"
+                  ? "pt-4 text-center font-manrope text-sm font-[600] uppercase tracking-[2px] text-[#000]"
                   : "pt-4 text-center font-manrope text-sm font-[600] uppercase tracking-[2px] text-[#fff]"
               }
             >
@@ -71,8 +71,8 @@ const Navbar = ({
             <Link
               href={"/contact"}
               className={
-                pathname === "/" || pathname === "/table-booking"
-                  ? "pt-4 text-center font-manrope text-sm font-[600] uppercase tracking-[2px] text-[#ffff]"
+                pathname === "/menu"
+                  ? "pt-4 text-center font-manrope text-sm font-[600] uppercase tracking-[2px] text-[#000]"
                   : "pt-4 text-center font-manrope text-sm font-[600] uppercase tracking-[2px] text-[#fff]"
               }
             >
@@ -82,8 +82,8 @@ const Navbar = ({
             <Link
               href={"/menu"}
               className={
-                pathname === "/" || pathname === "/table-booking"
-                  ? "pt-4 text-center font-manrope text-sm font-[600] uppercase tracking-[2px] text-[#ffff]"
+                pathname === "/menu"
+                  ? "pt-4 text-center font-manrope text-sm font-[600] uppercase tracking-[2px] text-[#000]"
                   : "pt-4 text-center font-manrope text-sm font-[600] uppercase tracking-[2px] text-[#fff]"
               }
             >
@@ -93,8 +93,8 @@ const Navbar = ({
               <DropdownMenuTrigger asChild className="cursor-pointer">
                 <div
                   className={
-                    pathname === "/" || pathname === "/table-booking"
-                      ? "pt-4 text-center font-manrope text-sm font-[600] uppercase tracking-[2px] text-[#ffff]"
+                    pathname === "/menu"
+                      ? "pt-4 text-center font-manrope text-sm font-[600] uppercase tracking-[2px] text-[#000]"
                       : "pt-4 text-center font-manrope text-sm font-[600] uppercase tracking-[2px] text-[#fff]"
                   }
                 >
@@ -138,7 +138,7 @@ const Navbar = ({
             {/* <Link
               href={"/about-us"}
               className={
-                pathname === "/" || pathname === "/table-booking"
+                pathname === "/menu" 
                   ? "fon6-[400] pt-4 text-center font-manrope text-sm uppercase tracking-[2px] text-[#ffff]"
                   : "fon6-[400] pt-4 text-center font-manrope text-sm uppercase tracking-[2px] text-[#fff]"
               }
