@@ -136,9 +136,9 @@ const Contact = ({}) => {
                 <div className="flex flex-col gap-4">
                   <Link
                     className="font-poppins text-[#9C9E9F]"
-                    href={"mailto:Laylarestaurantuk@gmail.com"}
+                    href={"mailto:Info@laylarestaurant.co.uk"}
                   >
-                    Laylarestaurantuk@gmail.com
+                    Info@laylarestaurant.co.uk
                   </Link>
                 </div>
               </div>
