@@ -105,14 +105,16 @@ const Footer = ({}) => {
               </Link> */}
 
               <div className="flex flex-row items-center gap-3 pt-8">
-                {/* <Link
-                  href={"https://www.instagram.com/istanbulgrillculcheth/"}
+                <Link
+                  href={
+                    "https://www.instagram.com/laylarestaurant.uk?utm_source=qr&igsh=NmdpbDdmZHBkMDYy"
+                  }
                   target="_blank"
                 >
                   {" "}
                   <Icons.instagram className="[color:var(--text-light,#FBEAD2)]" />
                 </Link>
-                <Link
+                {/* <Link
                   href={"https://www.facebook.com/istanbulgrillculcheth/"}
                   target="_blank"
                 >
@@ -257,14 +259,16 @@ const Footer = ({}) => {
                 bradshawgrill122@gmail.com
               </Link> */}
               <div className="flex flex-row items-center gap-3 pt-8">
-                {/* <Link
-                  href={"https://www.instagram.com/360kebab/"}
+                <Link
+                  href={
+                    "https://www.instagram.com/laylarestaurant.uk?utm_source=qr&igsh=NmdpbDdmZHBkMDYy"
+                  }
                   target="_blank"
                 >
                   {" "}
                   <Icons.instagram className="[color:var(--text-light,#FBEAD2)]" />
                 </Link>
-                <Link
+                {/* <Link
                   href={
                     "https://www.tripadvisor.com/Restaurant_Review-g187069-d19297066-Reviews-360_Lounge-Manchester_Greater_Manchester_England.html"
                   }
