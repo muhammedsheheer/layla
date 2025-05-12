@@ -6,6 +6,14 @@ import { useEffect, useState } from "react";
 import Sidebar from "./SideBar";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
 
 const Navbar = ({
   position = "static",
@@ -75,12 +83,57 @@ const Navbar = ({
               href={"/menu"}
               className={
                 pathname === "/" || pathname === "/table-booking"
-                  ? "fon6-[400] pt-4 text-center font-manrope text-sm uppercase tracking-[2px] text-[#ffff]"
-                  : "fon6-[400] pt-4 text-center font-manrope text-sm uppercase tracking-[2px] text-[#fff]"
+                  ? "pt-4 text-center font-manrope text-sm font-[600] uppercase tracking-[2px] text-[#ffff]"
+                  : "pt-4 text-center font-manrope text-sm font-[600] uppercase tracking-[2px] text-[#fff]"
               }
             >
-              Menu
+              Order Online
             </Link>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild className="cursor-pointer">
+                <div
+                  className={
+                    pathname === "/" || pathname === "/table-booking"
+                      ? "pt-4 text-center font-manrope text-sm font-[600] uppercase tracking-[2px] text-[#ffff]"
+                      : "pt-4 text-center font-manrope text-sm font-[600] uppercase tracking-[2px] text-[#fff]"
+                  }
+                >
+                  Menus
+                </div>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="mt-4 w-56 rounded-none border-[#CDAE64] bg-[#000] hover:cursor-pointer">
+                <DropdownMenuRadioGroup
+                  value={positiond}
+                  onValueChange={setPositiond}
+                >
+                  <Link href="/pdf/Main_Menu.pdf" target="_blank">
+                    <DropdownMenuRadioItem value="carte">
+                      Main Menu
+                    </DropdownMenuRadioItem>
+                  </Link>
+                  <Link href="/pdf/Takeout_Menu.pdf" target="_blank">
+                    <DropdownMenuRadioItem value="lunch">
+                      Takeout Menu
+                    </DropdownMenuRadioItem>
+                  </Link>
+                  <Link href="/pdf/Kids_Menu.pdf" target="_blank">
+                    <DropdownMenuRadioItem value="lunch">
+                      Kids Menu
+                    </DropdownMenuRadioItem>
+                  </Link>
+                  <Link href="/pdf/Drinks_Cocktail_Menu.pdf" target="_blank">
+                    <DropdownMenuRadioItem value="lunch">
+                      Drinks & Cocktail Menu
+                    </DropdownMenuRadioItem>
+                  </Link>
+                  <Link href="/pdf/Dessert_Hot_Drinks_Menu.pdf" target="_blank">
+                    <DropdownMenuRadioItem value="lunch">
+                      Dessert & Hot Drinks Menu
+                    </DropdownMenuRadioItem>
+                  </Link>
+                </DropdownMenuRadioGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
 
             {/* <Link
               href={"/about-us"}
