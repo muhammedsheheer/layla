@@ -114,13 +114,10 @@ const Footer = ({}) => {
                   {" "}
                   <Icons.instagram className="[color:var(--text-light,#FBEAD2)]" />
                 </Link>
-                {/* <Link
-                  href={"https://www.facebook.com/istanbulgrillculcheth/"}
-                  target="_blank"
-                >
+                <Link href={""} target="_blank">
                   {" "}
                   <Icons.facebook className="[color:var(--text-light,#FBEAD2)]" />
-                </Link> */}
+                </Link>
                 <Link href={"https://g.co/kgs/KBMNsyS"} target="_blank">
                   {" "}
                   <Icons.google className="[color:var(--text-light,#FBEAD2)]" />

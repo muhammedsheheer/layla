@@ -49,7 +49,7 @@ export default function TableBookingForm() {
                 form.reset();
                 router.push("/");
               }}
-              className="rounded bg-primary px-4 py-2 text-white"
+              className="rounded bg-primary px-4 py-2 text-black"
             >
               OK
             </button>

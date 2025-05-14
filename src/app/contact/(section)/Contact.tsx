@@ -151,12 +151,9 @@ const Contact = ({}) => {
                 >
                   <Icons.instagram className="text-[#9C9E9F]" />
                 </Link>
-                {/* <Link
-                  href={"https://www.facebook.com/istanbulgrillculcheth/"}
-                  target="_blank"
-                >
+                <Link href={""} target="_blank">
                   <Icons.facebook className="text-[#9C9E9F]" />
-                </Link> */}
+                </Link>
                 <Link href={"https://g.co/kgs/KBMNsyS"} target="_blank">
                   <Icons.google className="text-[#9C9E9F]" />
                 </Link>

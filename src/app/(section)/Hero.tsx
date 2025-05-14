@@ -84,7 +84,7 @@ const Hero: React.FC = () => {
             ))}
         </h1>
         <motion.div
-          className="flex flex-row items-center justify-center gap-5 md:flex-row md:gap-8"
+          className="flex flex-col items-center justify-center gap-5 md:flex-row md:gap-8"
           initial={{ opacity: 0, y: 100 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false }}
@@ -95,7 +95,7 @@ const Hero: React.FC = () => {
               variant={"imageoutline"}
               className="hero-button flex items-center justify-center gap-3 px-8 py-7 uppercase text-[#000]"
             >
-              Book Now
+              Book Your Table
             </Button>
           </Link>
           {/* <Link href={"/menu"}>
@@ -105,7 +105,7 @@ const Hero: React.FC = () => {
           </Link> */}
           <Link href="/menu">
             <Button
-              className="hero-button flex items-center justify-center gap-3 px-8 py-7 uppercase text-[#000]"
+              className="hero-button flex items-center justify-center gap-3 px-11 py-10 uppercase text-[#000]"
               variant="imageoutline"
             >
               Order Now

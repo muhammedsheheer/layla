@@ -90,12 +90,12 @@ function About() {
                   Order Now
                 </Button>
               </Link> */}
-              <Link href="/menu">
+              <Link href="/table-booking">
                 <Button
                   className="hero-button flex items-center justify-center gap-3 px-8 py-7 uppercase text-[#000]"
                   variant="imageoutline"
                 >
-                  Order Now
+                  Book Your Table
                 </Button>
               </Link>
             </div>

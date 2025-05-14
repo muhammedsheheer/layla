@@ -106,27 +106,27 @@ const Navbar = ({
                   value={positiond}
                   onValueChange={setPositiond}
                 >
-                  <Link href="/pdf/Main_Menu.pdf" target="_blank">
+                  <Link href="/main-menu">
                     <DropdownMenuRadioItem value="carte">
                       Main Menu
                     </DropdownMenuRadioItem>
                   </Link>
-                  <Link href="/pdf/Takeout_Menu.pdf" target="_blank">
+                  <Link href="/takeout-menu">
                     <DropdownMenuRadioItem value="lunch">
                       Takeout Menu
                     </DropdownMenuRadioItem>
                   </Link>
-                  <Link href="/pdf/Kids_Menu.pdf" target="_blank">
+                  <Link href="/kids-menu">
                     <DropdownMenuRadioItem value="lunch">
                       Kids Menu
                     </DropdownMenuRadioItem>
                   </Link>
-                  <Link href="/pdf/Drinks_Cocktail_Menu.pdf" target="_blank">
+                  <Link href="/drinks-menu">
                     <DropdownMenuRadioItem value="lunch">
                       Drinks & Cocktail Menu
                     </DropdownMenuRadioItem>
                   </Link>
-                  <Link href="/pdf/Dessert_Hot_Drinks_Menu.pdf" target="_blank">
+                  <Link href="/dessert-menu">
                     <DropdownMenuRadioItem value="lunch">
                       Dessert & Hot Drinks Menu
                     </DropdownMenuRadioItem>
