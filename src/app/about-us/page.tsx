@@ -3,6 +3,7 @@ import Hero from "@/app/about-us/(section)/Hero";
 import JoinUs from "@/app/about-us/(section)/JoinUs";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import Reviews from "./(section)/Review";
 
 const page = ({}) => {
   return (
@@ -12,7 +13,7 @@ const page = ({}) => {
         <Hero />
         <BavetteStory />
         <JoinUs />
-        {/* <Review /> */}
+        <Reviews />
         <Footer />
       </div>
     </main>

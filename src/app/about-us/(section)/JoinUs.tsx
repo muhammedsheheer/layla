@@ -9,11 +9,11 @@ const JoinUs = ({}) => {
     <section
       className="relative flex h-screen w-full items-center justify-center"
       style={{
-        backgroundImage: `url('/images/about-us/about3.png')`,
+        backgroundImage: `url('/images/about-us/4.jpg')`,
         backgroundSize: "cover",
       }}
     >
-      <div className="absolute inset-0" />
+      <div className="absolute inset-0 z-0 bg-black/50" />
       <div className="z-10 flex h-full w-full flex-col-reverse items-center justify-center gap-4 md:flex-row">
         <motion.div
           className="flex h-full w-full flex-col items-center justify-center gap-[2.5rem] p-6"
@@ -22,10 +22,10 @@ const JoinUs = ({}) => {
           viewport={{ once: false }}
           transition={{ duration: 1.5, ease: "easeOut" }}
         >
-          <h1 className="max-w-[500px] text-center font-times_new_roman text-5xl text-[#CCAD64] md:leading-[60px]">
+          <h1 className="max-w-[500px] text-center font-times_new_roman text-5xl text-[#fff] md:leading-[60px]">
             Discover Unforgettable Flavour — Only at Layla
           </h1>
-          <p className="max-w-[450px] text-center font-[500] leading-[160%] text-[#CCAD64]">
+          <p className="max-w-[450px] text-center font-[500] leading-[160%] text-[#fff]">
             Whether you’re planning an intimate dinner or a grand celebration,{" "}
             <strong>Layla</strong> invites you to embark on a culinary journey
             like no other. From carefully curated flavours to the finest
@@ -38,10 +38,10 @@ const JoinUs = ({}) => {
           <Link href={"/table-booking"}>
             <Button
               variant="outline"
-              className="group w-fit items-center gap-[1.19rem] border-[#CCAD64] bg-transparent px-7 py-7 font-semibold uppercase text-[#CCAD64] hover:bg-[#CCAD64]"
+              className="group w-fit items-center gap-[1.19rem] border-[#fff] bg-transparent px-7 py-7 font-semibold uppercase text-[#fff] hover:bg-[#fff]"
             >
               Book Now{" "}
-              <Icons.rightArrow className="text-[#CCAD64] duration-300 ease-in-out group-hover:translate-x-1 group-hover:text-primary-foreground" />
+              <Icons.rightArrow className="text-[#fff] duration-300 ease-in-out group-hover:translate-x-1 group-hover:text-primary-foreground" />
             </Button>
           </Link>
         </motion.div>

@@ -7,21 +7,15 @@ const BavetteStory = ({}) => {
   return (
     <section className="relative flex h-full w-full items-center justify-center bg-[#000] p-4 lg:py-16">
       <div className="flex h-full w-full flex-col items-center justify-center gap-11 bg-[#000]">
-        <motion.h2
-          className="text-center font-times_new_roman text-5xl text-[#CCAD64] md:left-[15%] md:text-8xl"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
-        >
+        <h2 className="text-center font-times_new_roman text-5xl text-[#CCAD64] md:left-[15%] md:text-8xl">
           The Layla
           <br />
           Story
-        </motion.h2>
+        </h2>
         <div className="flex h-full w-full flex-col items-center justify-center gap-4 bg-[#000] md:flex-row lg:px-24 lg:py-20">
           <div className="h-full w-full overflow-hidden p-4 md:w-1/2 md:p-0">
             <motion.img
-              src="/images/about-us/about2.jpg"
+              src="/images/about-us/3.jpg"
               width={577}
               height={676}
               alt="private dining"
@@ -32,13 +26,7 @@ const BavetteStory = ({}) => {
               transition={{ duration: 1.5, ease: "easeOut" }}
             />
           </div>
-          <motion.div
-            className="flex h-full w-full flex-col items-center gap-[2.5rem] p-6 md:w-1/2 md:items-start lg:ml-24"
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: false }}
-            transition={{ duration: 1.5, ease: "easeOut" }}
-          >
+          <div className="flex h-full w-full flex-col items-center gap-[2.5rem] p-6 md:w-1/2 md:items-start lg:ml-24">
             <h1 className="max-w-[500px] text-center font-times_new_roman text-5xl text-[#CCAD64] md:text-start md:text-7xl">
               Where Passion <br /> Becomes Perfection
             </h1>
@@ -60,7 +48,7 @@ const BavetteStory = ({}) => {
               unite creativity and flavour in a way that creates lasting
               memories.
             </p>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

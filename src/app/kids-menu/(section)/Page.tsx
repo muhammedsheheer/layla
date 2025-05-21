@@ -30,15 +30,15 @@ const Page = () => {
         </div>
         <Image
           src={"/images/menu/kids/1.jpg"}
-          width={281}
-          height={74}
+          width={2480}
+          height={1740}
           alt="logo"
           className="h-full w-full object-cover"
         />
         <Image
           src={"/images/menu/kids/2.jpg"}
-          width={281}
-          height={74}
+          width={2480}
+          height={1740}
           alt="logo"
           className="h-full w-full object-cover"
         />
