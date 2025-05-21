@@ -24,12 +24,14 @@ const Checkout = () => {
     const [couponApply, setCouponApply] = useState(false);
     const [isDeliveryNow, setIsDeliveryNow] = useState(true);
     const { restaurant, items } = useRestaurant();
+    const [deliveryCharge,setDeliveryCharge] = useState<number | null>(null)
     const [totalCharges, setTotalCharges] = useState(0);
     useEffect(() => {
         const savedOrderType = localStorage.getItem("orderType");
         if (savedOrderType?.toString() === "2") {
             setCheckoutType("delivery");
         } else {
+            setDeliveryCharge(null)
             setCheckoutType("pickup");
         }
     }, []);
@@ -126,6 +128,12 @@ const Checkout = () => {
                 if (charge?.orderType === "3" && checkoutType !== "pickup") {
                     return (totalcharge += 0);
                 }
+                if (charge?.orderType === "1") {
+                    return (totalcharge += 0);
+                }
+                if (charge?.orderType === "4") {
+                    return (totalcharge += 0);
+                }
                 if (charge.isPercentage) {
                     return (totalcharge += (cartValue() * charge?.value) / 100);
                 } else {
@@ -149,7 +157,7 @@ const Checkout = () => {
                                 {restaurant?.isTakeAwayEnabled && (
                                     <TabsTrigger
                                         value="pickup"
-                                        className="rounded-full bg-transparent px-4 py-3 text-sm font-semibold text-menusecondary data-[state=active]:bg-menuprimary data-[state=active]:text-menusecondary"
+                                        className="rounded-full bg-transparent px-4 py-3 text-sm font-semibold text-menusecondary data-[state=active]:bg-menuprimary data-[state=active]:text-black"
                                         onClick={() => {
                                             setCheckoutType("pickup");
                                             localStorage.setItem("orderType", (3).toString());
@@ -161,7 +169,7 @@ const Checkout = () => {
                                 {restaurant?.isDeliveryEnabled && (
                                     <TabsTrigger
                                         value="delivery"
-                                        className="rounded-full bg-transparent px-4 py-3 text-sm font-semibold text-menusecondary data-[state=active]:bg-menuprimary data-[state=active]:text-menusecondary"
+                                        className="rounded-full bg-transparent px-4 py-3 text-sm font-semibold text-menusecondary data-[state=active]:bg-menuprimary data-[state=active]:text-black"
                                         onClick={() => {
                                             setCheckoutType("delivery");
                                             localStorage.setItem("orderType", (2).toString());
@@ -195,7 +203,7 @@ const Checkout = () => {
                                     Your order must total at least &nbsp; £{restaurant?.minimumDeliveryOrderAmount}. Why not have another look and add a few more tempting treats?
                                 </p>
                             ) : (
-                                <Delivery />
+                                <Delivery setDeliveryCharge={setDeliveryCharge} deliveryCharge={deliveryCharge}/>
                             )}
                         </TabsContent>
                     </Tabs>
@@ -251,7 +259,7 @@ const Checkout = () => {
                                                         return (
                                                             <div key={index}>
                                                                 <p>
-                                                                    {modifier?.count} X {name}
+                                                                    {(modifier.count)*(item.quantity)} X {name}
                                                                 </p>
                                                             </div>
                                                         );
@@ -262,7 +270,7 @@ const Checkout = () => {
                                                         {item.notes}
                                                     </p>
                                                     <p className="text-lg font-normal text-menusecondary">
-                                                        {getCurrencySymbol(item.price.currency)} {formattedItemPrice(item.price.value)}
+                                                        {getCurrencySymbol(item.price.currency)} {formattedItemPrice(item.price.value * item.quantity)}
                                                     </p>
                                                 </div>
                                             </div>
@@ -320,6 +328,12 @@ const Checkout = () => {
                                             if (charge?.orderType === "3" && checkoutType !== "pickup") {
                                                 return null;
                                             }
+                                            if (charge?.orderType === "1") {
+                                                return null;
+                                            }
+                                            if (charge?.orderType === "4") {
+                                                return null;
+                                            }
                                             if (charge.isPercentage) {
                                                 return (
                                                     <div className="flex justify-between" key={charge._id}>
@@ -341,18 +355,31 @@ const Checkout = () => {
                                             }
                                         }
                                     })}
+                                    {
+                                        deliveryCharge !== null && (
+                                            <div className="flex justify-between">
+                                            <p className="text-sm font-semibold text-menusecondary">Delivery Charge</p>
+                                            <p className="text-lg font-semibold text-menusecondary">
+                                                {getCurrencySymbol("GBP")} {deliveryCharge.toFixed(2)}
+                                            </p>
+                                        </div>
+                                        )
+                                    }
                                     <div className="flex justify-between">
                                         <p className="text-lg font-semibold text-menusecondary">Total Amount</p>
                                         <p className="text-lg font-semibold text-menusecondary">
                                             {getCurrencySymbol("GBP")}{" "}
-                                            {(cartValue() + totalCharges)
+                                            {deliveryCharge !== null ? (cartValue() + totalCharges + deliveryCharge)
                                                 // +
                                                 // calculateServiceCharge(
                                                 //   cartValue(),
                                                 //   restaurant?.serviceCharge ?? 0,
                                                 // )
                                                 // { restaurant?.charges.map((charge) => charge?.isActive ? charge.isPercentage ? (cartValue() * charge?.value) / 100 : charge?.value : 0 }.reduce((a, b) => a + b, 0)}
-                                                .toFixed(2)}
+                                                .toFixed(2)
+                                            :
+                                            (cartValue() + totalCharges).toFixed(2)
+                                            }
                                         </p>
                                     </div>
                                     <div>

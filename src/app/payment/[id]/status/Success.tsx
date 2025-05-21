@@ -14,7 +14,7 @@ interface SuccessProps {
     id: string;
 }
 
-const Success: FC<SuccessProps> = ({ data, id }) => {
+const Success: FC<SuccessProps> = ({ data }) => {
     const { restaurant } = useRestaurant();
     const { clearCart } = useCart();
     const [close, setClose] = useState(false);
@@ -32,7 +32,7 @@ const Success: FC<SuccessProps> = ({ data, id }) => {
     if (!data) {
         return (
             <div className="flex h-full w-full flex-col items-center justify-center gap-5 bg-menubackground">
-                <p className="text-4xl font-[600] tracking-[2px] text-menuprimary">Placing your order...</p>
+                <p className="text-4xl font-[600] tracking-[2px] text-menuprimary text-center">Placing your order...</p>
                 <Image src="/images/payment/loading.png" width={147} height={147} alt="loading" />
             </div>
         );
@@ -52,6 +52,7 @@ const Success: FC<SuccessProps> = ({ data, id }) => {
         //     <Link href="/">Go Home</Link>
         //   </Button>
         // </main>
+        
         <section className="relative flex h-full w-full flex-col bg-menubackground md:px-[130px]">
             <div className="flex w-full flex-col items-center justify-center">
                 {/*head section */}
@@ -88,7 +89,7 @@ const Success: FC<SuccessProps> = ({ data, id }) => {
                     >
                         <div>
                             <button className="font-manrope bg-menubackground px-5 py-3 text-sm font-[800] leading-[150%] text-menuprimary md:text-base">
-                                ORDER #{id.slice(-5)}
+                                ORDER #{data.orderRef ? data.orderRef :''}
                             </button>
                         </div>
                         <h4 className="font-manrope text-center text-2xl font-[500] leading-[150%] text-menubackground md:text-4xl">We’ve got your order</h4>
@@ -111,8 +112,8 @@ const Success: FC<SuccessProps> = ({ data, id }) => {
                         <p className="font-manrope text-xs font-[400] leading-[150%] tracking-[1.02px] text-menusecondary md:text-base">
                             {restaurant?.address.firstLine} {restaurant?.address.secondLine}
                             <br />
-                            {restaurant?.address.city}
-                            {restaurant?.address.countryCode}
+                            {restaurant?.address.city}&nbsp;
+                            {restaurant?.address.countryCode}&nbsp;
                             {restaurant?.address.postCode}
                         </p>
                         <span className="font-manrope text-xs font-[400] leading-[150%] tracking-[1.02px] text-menusecondary underline decoration-menusecondary decoration-1 underline-offset-4 md:text-base">
@@ -154,30 +155,20 @@ const Success: FC<SuccessProps> = ({ data, id }) => {
                                                     {item.notes}
                                                 </h5>
                                                 <span className="font-manrope text-sm font-[700] leading-[150%] text-menuprimary md:text-base">
-                                                    £{formattedItemPrice(item?.price.value * item.quantity)}
+                                                    £{formattedItemPrice(item?.price.value)}
                                                 </span>
                                             </div>
-                                            {Object.entries(
-                                                item?.modifiers?.reduce((acc: Record<string, { count: number; price: number }>, mod) => {
-                                                    const name = mod?.menuItem?.name;
-                                                    if (name) {
-                                                        if (!acc[name]) {
-                                                            acc[name] = { count: 0, price: mod?.price?.value };
-                                                        }
-                                                        acc[name].count += 1;
-                                                    }
-                                                    return acc;
-                                                }, {})
-                                            ).map(([name, { count, price }], i) => (
-                                                <div className="flex w-full justify-between pl-4" key={i}>
+                                      {item.modifiers.map((i,index)=>(
+
+                                          <div className="flex w-full justify-between pl-4" key={index}>
                                                     <h5 className="font-manrope text-sm font-[400] leading-[150%] text-menusecondary md:text-base">
-                                                        {count} x {name}
+                                                      {i.quantity * item.quantity} x {i.menuItem.name}
                                                     </h5>
                                                     <span className="font-manrope text-sm font-[700] leading-[150%] text-menuprimary md:text-base">
-                                                        £{formattedItemPrice(price * count)}
+                                                        £{formattedItemPrice(i.quantity * i.price.value)}
                                                     </span>
                                                 </div>
-                                            ))}
+                                       ))}
                                         </div>
                                     );
                                 })}
@@ -198,7 +189,7 @@ const Success: FC<SuccessProps> = ({ data, id }) => {
                                 </div>
                             )} */}
                             {close &&
-                                data?.charges.map((charge) => {
+                                data?.charges.chargeItems.map((charge) => {
                                     if (charge?.isActive) {
                                         if (charge.isPercentage) {
                                             return (
@@ -221,6 +212,14 @@ const Success: FC<SuccessProps> = ({ data, id }) => {
                                         }
                                     }
                                 })}
+                                {close && (
+                                    <div className="flex flex-row justify-between pb-2">
+                                                    <p className="font-manrope text-sm font-[400] leading-[150%] text-menusecondary md:text-base">Delivery Charge</p>
+                                                    <p className="font-manrope text-sm font-[700] leading-[150%] text-menuprimary md:text-base">
+                                                        {getCurrencySymbol("GBP")} {(data?.deliveryCharge?.amount).toFixed(2)}
+                                                    </p>
+                                 </div>
+                                )}
                             {close && <div className="h-[0.2px] w-full bg-menuprimary" />}
                             <div className="flex flex-row justify-between pb-2">
                                 <h5 className="font-manrope text-sm font-[700] leading-[150%] text-menusecondary md:text-base">Order Total</h5>

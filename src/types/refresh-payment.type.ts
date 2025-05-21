@@ -10,6 +10,9 @@ export interface RefreshPayment {
     totalAmount: number;
     courseAway: string | null;
     orderStatus: string;
+    deliveryCharge:{
+      amount:number;
+    };
     totalDiscount: number;
     notes: string;
     transactionId: string;
@@ -46,6 +49,7 @@ export interface RefreshPayment {
         modifiers: {
             _idMenuItem: string;
             _idModifiers: string;
+            quantity: number;
             menuItem: {
                 description: string;
                 name: string;
@@ -69,7 +73,10 @@ export interface RefreshPayment {
         _id: string;
         _idMenuItem: string;
     }[];
-    charges: charge[];
+    charges: {        
+        chargeItems:chargeItem[];
+        chargeAmount:number;
+    };
     discountType: number;
     totalpayment: number;
     paymentType: number;
@@ -80,11 +87,12 @@ export interface RefreshPayment {
         createdAt: string;
     }[];
     createdAt: string;
+    orderRef:string;
     updatedAt: string;
     __v: number;
 }
 
-interface charge {
+interface chargeItem {
     isPercentage: boolean;
     isActive: boolean;
     _id: string;

@@ -13,7 +13,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-const Cart = ({ }) => {
+const Cart = ({}) => {
     const { cartItems, updateItem, removeItem } = useCart();
     const { restaurant } = useRestaurant();
     const [totalAmount, setTotalAmount] = useState(0);
@@ -24,9 +24,14 @@ const Cart = ({ }) => {
     }, []);
 
     useEffect(() => {
-        const totalcart = cartItems.reduce((acc, i) => acc + i.price.value, 0);
+        const totalCart = cartItems.reduce((acc, i) => {
+            if (i.quantity > 0) {
+                return acc + i.price.value * i.quantity;
+            }
 
-        setTotalAmount(totalcart);
+            return acc + i.price.value;
+        }, 0);
+        setTotalAmount(totalCart);
     }, [cartItems]);
     const reversedCartItems = [...cartItems].reverse();
     return (
@@ -76,7 +81,10 @@ const Cart = ({ }) => {
                                                                             ) : (
                                                                                 menuitem?.modifiers.map((mod, index) =>
                                                                                     GetModifiersFromItemId(menuitem, items, index).map((modifier) => {
-                                                                                        if (modifier._id === item.modifiers.find((modifier) => modifier.defaultSelection)?.defaultSelection) {
+                                                                                        if (
+                                                                                            modifier._id ===
+                                                                                            item.modifiers.find((modifier) => modifier.defaultSelection)?.defaultSelection
+                                                                                        ) {
                                                                                             return `${getCurrencySymbol(modifier.price.currency)} ${formattedItemPrice(modifier.price.value)}`;
                                                                                         }
                                                                                     })
@@ -109,15 +117,17 @@ const Cart = ({ }) => {
                                                     ).map(([name, modifier], index) => (
                                                         <div className="flex w-full items-center justify-between" key={index}>
                                                             <p className="w-[80%] text-sm font-[300] tracking-[1.4px] text-menusecondary">
-                                                                {modifier.count}&nbsp;&nbsp;{name}
+                                                                {modifier.count * item.quantity}&nbsp;&nbsp;{name}
                                                             </p>
-                                                            {modifier && modifier.price.value > 0 ? (
-                                                                <p className="text-sm font-[700] text-menuprimary">
-                                                                    {getCurrencySymbol(modifier.price.currency)} {formattedItemPrice(modifier.price.value)}
-                                                                </p>
-                                                            ) : (
-                                                                ""
-                                                            )}
+                                                            <p className="text-sm font-[700] text-menuprimary">
+                                                                {modifier.price.value > 0 ? (
+                                                                    <>
+                                                                        {getCurrencySymbol(modifier.price.currency)} {formattedItemPrice(modifier.price.value)}
+                                                                    </>
+                                                                ) : (
+                                                                    <>Free</>
+                                                                )}
+                                                            </p>
                                                         </div>
                                                     ))}
                                                 </div>
@@ -150,7 +160,8 @@ const Cart = ({ }) => {
                                                                             ...item,
                                                                             price: {
                                                                                 ...item.price,
-                                                                                value: item.price.value - item.price.value / item.quantity,
+                                                                                value: item.price.value,
+                                                                                // - item.price.value / item.quantity,
                                                                             },
                                                                             quantity: item.quantity - 1,
                                                                         },
@@ -170,7 +181,8 @@ const Cart = ({ }) => {
                                                                         ...item,
                                                                         price: {
                                                                             ...item.price,
-                                                                            value: item.price.value + item.price.value / item.quantity,
+                                                                            value: item.price.value,
+                                                                            // + item.price.value / item.quantity,
                                                                         },
                                                                         quantity: item.quantity + 1,
                                                                     },
@@ -207,7 +219,7 @@ const Cart = ({ }) => {
                         disabled={cartItems.length === 0 || !restaurant?.onlineOrder || (!restaurant?.isDeliveryEnabled && !restaurant.isTakeAwayEnabled)}
                         className="flex w-full items-center justify-center rounded-none bg-menuprimary py-8 text-lg font-[700] uppercase tracking-[1px] text-menuforeground hover:bg-buttonhover disabled:bg-buttondisabled"
                     >
-                        checkout{' '}{"£"} {formattedItemPrice(totalAmount)}
+                        checkout {"£"} {formattedItemPrice(totalAmount)}
                     </Button>
                 </Link>
             </div>

@@ -70,7 +70,7 @@ export default function TableBookingForm() {
   };
 
   return (
-    <div className="w-full space-y-6 px-4">
+    <div className="w-full flex justify-center items-center space-y-6 px-4">
       {page === 0 ? (
         <TimeForm mainform={form} setpage={setPage} />
       ) : (

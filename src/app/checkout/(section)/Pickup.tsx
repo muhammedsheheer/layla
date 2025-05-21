@@ -20,6 +20,7 @@ import { Input } from "@/components/ui/input";
 import { useRestaurant } from "@/context/RestaurantContext";
 import { calculateServiceCharge } from "@/lib/calculate-service-charge";
 import { format } from "date-fns";
+import type { CartItemModifier } from "@/types/cart-item.type";
 
 // interface PickupProps {
 
@@ -71,8 +72,8 @@ const Pickup = () => {
     const parsedPickup = JSON.parse(localStorage.getItem("pickup") as string) as PickupData;
     const [pickup, setPickUp] = useState<string>(parsedPickup?.pickup ? parsedPickup.pickup : "Standard");
     const [scheduleTime, setScheduleTime] = useState<ScheduleTime>({
-        time: "",
-        date: "",
+        time: parsedPickup?.scheduleTime.time ?? "",
+        date: parsedPickup?.scheduleTime.date ?? "",
     });
     // const [note, setNote] = useState("");
     const form = useForm<FormData>({
@@ -80,22 +81,56 @@ const Pickup = () => {
         defaultValues: {},
     });
     const { cartValue } = useCart();
+    const finalCart = cartItems.map((item) => {
+        const modifierCount: Record<string, CartItemModifier & { quantity: number }> = {};
 
+        item.modifiers.forEach((modifier) => {
+            if (!modifier.price._id) return; // Ensure price._id exists before processing
+
+            const key = modifier.price._id; // Use only price._id as the key
+
+            if (modifierCount[key]) {
+                modifierCount[key].quantity += 1;
+            } else {
+                modifierCount[key] = { ...modifier, quantity: 1 };
+            }
+        });
+
+        return {
+            ...item,
+            modifiers: Object.values(modifierCount), // Convert object back to array
+        };
+    });
+
+    const dateStr = scheduleTime?.date ?? "1970-01-01";
+    const timeStr = scheduleTime?.time?.split("-")[0] ?? "00:00";
+
+    const [hours, minutes] = timeStr.split(":");
+    const sheduleDate = new Date(dateStr);
+    if (hours && minutes) {
+        sheduleDate.setHours(parseInt(hours), parseInt(minutes), 0, 0);
+    }
     const { mutate, isPending } = useMutation({
         mutationFn: async (data: FormData) => {
             const res: AxiosResponse<{
                 data: {
                     _id: string;
+                    orderType: number;
+                    totalAmount: number;
                 };
             }> = await axios.post(`${apiUrl}/orders`, {
                 _idRestaurant: restaurantID,
                 orderType: 3,
                 deliveryType: pickup === "Standard" ? "standard" : "scheduled",
                 deliveryTime:
-                    pickup === "Standard" ? new Date(Date.now() + 20 * 60000).toISOString() : new Date(`${scheduleTime.date}T${scheduleTime.time.split("-")[0]}:00Z`).toISOString(),
+                    pickup === "Standard"
+                        ? new Date(
+                              Date.now() + (restaurant?.busyMode ? Number(restaurant?.diningETA) + restaurant.busyModeTime : Number(restaurant?.diningETA)) * 60000
+                          ).toISOString()
+                        : new Date(sheduleDate).toISOString(),
                 description: "Order for " + data.name,
                 orderStatus: "placed_order",
-                items: cartItems,
+                items: finalCart,
                 notes: data.notes,
                 userDetails: {
                     name: data.name,
@@ -126,6 +161,9 @@ const Pickup = () => {
         },
         onSuccess: (data) => {
             toast("Order created successfully");
+            if (data?.orderType === 3) {
+                localStorage.setItem("totalAmount", data?.totalAmount.toString());
+            }
             router.push("/payment/" + data._id);
         },
         onError: (error: errordata) => {
@@ -138,13 +176,13 @@ const Pickup = () => {
         if (localpickup) {
             // form.setValue('name')
             const parsedPickup = JSON.parse(localpickup) as PickupData;
+
             form.setValue("name", parsedPickup.name as string);
             form.setValue("phone", parsedPickup.phone as string);
             form.setValue("email", parsedPickup.email as string);
             form.setValue("notes", parsedPickup.notes as string);
             if (parsedPickup.pickup) {
                 setPickUp(parsedPickup.pickup);
-                console.log(parsedPickup.pickup, "====parsedPickup");
                 if (parsedPickup.pickup === "Standard") {
                     setScheduleTime({
                         date: "",
@@ -152,17 +190,11 @@ const Pickup = () => {
                     } as ScheduleTime);
                 }
             }
-            if (
-                (parsedPickup?.scheduleTime as ScheduleTime) &&
-                parsedPickup?.scheduleTime?.date &&
-                parsedPickup.scheduleTime.time &&
-                parsedPickup.scheduleTime.date.length > 0 &&
-                parsedPickup.scheduleTime.time.length > 0
-            ) {
+            if ((parsedPickup?.scheduleTime as ScheduleTime) && parsedPickup.scheduleTime.date !== undefined && parsedPickup.scheduleTime.time !== undefined) {
                 setScheduleTime({
-                    date: parsedPickup.scheduleTime.date,
-                    time: parsedPickup.scheduleTime.time,
-                } as ScheduleTime);
+                    date: parsedPickup?.scheduleTime?.date?.toString(),
+                    time: parsedPickup?.scheduleTime?.time?.toString(),
+                });
             }
         }
     }, []);
@@ -179,11 +211,16 @@ const Pickup = () => {
                     time: scheduleTime.time,
                     date: scheduleTime.date,
                 },
-                pickup: pickup,
+                pickup: scheduleTime.time ? "Schedule" : "Standard",
             })
         );
     }, [form.watch("name"), scheduleTime, form.watch("phone"), form.watch("email"), form.watch("notes"), form, pickup]);
 
+    useEffect(() => {
+        if (scheduleTime.time) {
+            setPickUp("Schedule");
+        }
+    }, [scheduleTime.time]);
     const onSubmit = (data: FormData) => {
         return mutate(data);
     };
@@ -194,12 +231,12 @@ const Pickup = () => {
                 <div className="flex w-full items-center justify-between gap-1 px-1 py-1">
                     <div className="flex items-center gap-2">
                         <div className="rounded-md bg-menusecondary-foreground px-4 py-4 text-sm text-menuprimary">
-                            <MapPin />
+                            <MapPin stroke="#FFF"/>
                         </div>
                         <div>
-                            <p className="text-md font-semibold text-menusecondary">{restaurant?.name}</p>
+                            <p className="text-md font-semibold text-white">{restaurant?.name}</p>
                             <Link
-                                className="text-menusecondary-menuprimary-foreground text-sm"
+                                className="text-menuprimary text-sm"
                                 href={`https://www.google.com/maps/place/${restaurant?.address?.coords[0]},${restaurant?.address?.coords[1]}`}
                                 target="_blank"
                             >
@@ -230,7 +267,7 @@ const Pickup = () => {
                                             <Input
                                                 placeholder="Name"
                                                 {...field}
-                                                className="h-12 rounded-none border-b-[3px] border-l-0 border-r-0 border-t-0 border-b-borderinput bg-inputbg outline-none placeholder:text-placeholder focus-visible:border-b-[2px] focus-visible:border-b-menuprimary focus-visible:ring-0"
+                                                className="h-12 rounded-none border-b-[3px] border-l-0 border-r-0 border-t-0 border-b-borderinput bg-inputbg outline-none placeholder:text-placeholder focus-visible:border-b-[2px] focus-visible:border-b-menuprimary focus-visible:ring-0 text-white"
                                             />
                                         </FormControl>
                                         <FormMessage />
@@ -246,7 +283,7 @@ const Pickup = () => {
                                             <Input
                                                 placeholder="Phone Number"
                                                 {...field}
-                                                className="h-12 rounded-none border-b-[3px] border-l-0 border-r-0 border-t-0 border-b-borderinput bg-inputbg outline-none placeholder:text-placeholder focus-visible:border-b-[2px] focus-visible:border-b-menuprimary focus-visible:ring-0"
+                                                className="h-12 rounded-none border-b-[3px] border-l-0 border-r-0 border-t-0 border-b-borderinput bg-inputbg outline-none placeholder:text-placeholder focus-visible:border-b-[2px] focus-visible:border-b-menuprimary focus-visible:ring-0 text-white"
                                             />
                                         </FormControl>
                                         <FormMessage />
@@ -262,7 +299,7 @@ const Pickup = () => {
                                             <Input
                                                 placeholder="Email ID"
                                                 {...field}
-                                                className="h-12 rounded-none border-b-[3px] border-l-0 border-r-0 border-t-0 border-b-borderinput bg-inputbg outline-none placeholder:text-placeholder focus-visible:border-b-[2px] focus-visible:border-b-menuprimary focus-visible:ring-0"
+                                                className="h-12 rounded-none border-b-[3px] border-l-0 border-r-0 border-t-0 border-b-borderinput bg-inputbg outline-none placeholder:text-placeholder focus-visible:border-b-[2px] focus-visible:border-b-menuprimary focus-visible:ring-0 text-white"
                                             />
                                         </FormControl>
                                         <FormMessage />
@@ -277,22 +314,25 @@ const Pickup = () => {
                         <div className="flex w-full flex-col gap-3 px-1 py-1">
                             <div
                                 className={cn("flex w-full items-center gap-3 border-[2px] border-inputbg px-4 py-3 lg:w-2/3", pickup === "Standard" && "border-menuprimary")}
-                                onClick={() => setPickUp("Standard")}
+                                onClick={() => {
+                                    setPickUp("Standard");
+                                    setScheduleTime({
+                                        date: "",
+                                        time: "",
+                                    } as ScheduleTime);
+                                }}
                             >
-                                <Calendar />
+                                <Calendar stroke="#FFF"/>
                                 <div className="flex flex-col">
                                     <p className="text-lg font-semibold text-menusecondary">Standard</p>
                                     <p className="text-menuprimary-foreground">
-                                        {restaurant?.busyMode ? restaurant?.deliveryETA + restaurant.busyModeTime : restaurant?.deliveryETA} min
+                                        {restaurant?.busyMode ? Number(restaurant?.diningETA) + restaurant.busyModeTime : Number(restaurant?.diningETA)} min
                                     </p>
                                 </div>
                             </div>
                             <ScheduleTImePopup setScheduleTime={setScheduleTime} orderType="Collection">
-                                <div
-                                    className={cn("flex w-full items-center gap-3 border-[2px] border-inputbg px-4 py-3 lg:w-2/3", pickup === "Schedule" && "border-menuprimary")}
-                                    onClick={() => setPickUp("Schedule")}
-                                >
-                                    <CalendarClock />
+                                <div className={cn("flex w-full items-center gap-3 border-[2px] border-inputbg px-4 py-3 lg:w-2/3", pickup === "Schedule" && "border-menuprimary")}>
+                                    <CalendarClock stroke="#FFF"/>
                                     <div className="flex flex-col">
                                         <p className="text-lg font-semibold text-menusecondary">Schedule</p>
                                         <p className="text-menuprimary-foreground">
@@ -327,7 +367,7 @@ const Pickup = () => {
                                             Packing/Pickup Instructions
                                         </FormLabel>
                                         <FormControl>
-                                            <Textarea rows={3} className="border-none bg-inputbg placeholder:text-placeholder lg:w-4/5" {...field} />
+                                            <Textarea rows={3} className="border-none bg-inputbg placeholder:text-placeholder lg:w-4/5 text-white" {...field} />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>

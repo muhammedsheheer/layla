@@ -144,7 +144,7 @@ const TimeForm: FC<TimeFormProps> = ({ mainform, setpage }) => {
   };
 
   return (
-    <div className="flex w-full flex-col items-center justify-center gap-3">
+    <div className="flex w-full max-w-[1200px] flex-col items-center justify-center gap-3">
       <p className="text-3xl font-semibold text-[#fff]">
         Request a reservation
       </p>
@@ -156,7 +156,7 @@ const TimeForm: FC<TimeFormProps> = ({ mainform, setpage }) => {
           onSubmit={form.handleSubmit(onSubmit)}
           className="flex w-full flex-col items-center justify-center gap-2"
         >
-          <div className="grid w-full max-w-[650px] grid-cols-1 gap-6 py-12 md:grid-cols-2">
+          <div className="grid w-full grid-cols-1 gap-6 py-12 md:grid-cols-3">
             <FormField
               control={form.control}
               name="guests"

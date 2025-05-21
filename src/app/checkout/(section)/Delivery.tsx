@@ -8,13 +8,14 @@ import { useCart } from "@/context/CartContext";
 import { useRestaurant } from "@/context/RestaurantContext";
 import { calculateServiceCharge } from "@/lib/calculate-service-charge";
 import { cn } from "@/lib/utils";
+import type { CartItemModifier } from "@/types/cart-item.type";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import axios, { type AxiosResponse } from "axios";
 import { format } from "date-fns";
 import { Calendar, CalendarClock } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { type FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { z } from "zod";
@@ -35,6 +36,11 @@ const FormValidation = z.object({
 interface ScheduleTime {
     time: string; // Change to the appropriate type
     date: string; // Change to the appropriate type (e.g., Date, string, etc.)
+}
+
+interface DeliveryProps {
+    setDeliveryCharge: (value: number | null) => void;
+    deliveryCharge: number | null;
 }
 
 interface errordata {
@@ -64,7 +70,7 @@ type DeliveryData = {
     pickup: string;
 };
 
-const Delivery = () => {
+const Delivery: FC<DeliveryProps> = ({ setDeliveryCharge, deliveryCharge }) => {
     const { apiUrl, restaurantID, restaurant } = useRestaurant();
     const { cartValue } = useCart();
     const router = useRouter();
@@ -72,29 +78,61 @@ const Delivery = () => {
     const parsedPickup = JSON.parse(localStorage.getItem("delivery") as string) as DeliveryData;
     const [pickup, setPickUp] = useState<string>(parsedPickup?.pickup ? parsedPickup.pickup : "Standard");
     const [scheduleTime, setScheduleTime] = useState<ScheduleTime>({
-        time: "",
-        date: "",
+        time: parsedPickup?.scheduleTime?.time ?? "",
+        date: parsedPickup?.scheduleTime?.date ?? "",
     });
 
     const form = useForm<FormData>({
         resolver: zodResolver(FormValidation),
     });
 
+    const finalCart = cartItems.map((item) => {
+        const modifierCount: Record<string, CartItemModifier & { quantity: number }> = {};
+
+        item.modifiers.forEach((modifier) => {
+            if (!modifier.price._id) return; // Ensure price._id exists before processing
+
+            const key = modifier.price._id; // Use only price._id as the key
+
+            if (modifierCount[key]) {
+                modifierCount[key].quantity += 1;
+            } else {
+                modifierCount[key] = { ...modifier, quantity: 1 };
+            }
+        });
+
+        return {
+            ...item,
+            modifiers: Object.values(modifierCount), // Convert object back to array
+        };
+    });
+    const dateStr = scheduleTime?.date ?? "1970-01-01";
+    const timeStr = scheduleTime?.time?.split("-")[0] ?? "00:00";
+
+    const [hours, minutes] = timeStr.split(":");
+    const sheduleDate = new Date(dateStr);
+    if (hours && minutes) {
+        sheduleDate.setHours(parseInt(hours), parseInt(minutes), 0, 0);
+    }
     const { mutate, isPending } = useMutation({
         mutationFn: async (data: FormData) => {
             const res: AxiosResponse<{
                 data: {
                     _id: string;
+                    orderType: number;
+                    totalAmount: number;
                 };
             }> = await axios.post(`${apiUrl}/orders`, {
                 _idRestaurant: restaurantID,
                 orderType: 2,
                 deliveryType: pickup === "Standard" ? "standard" : "scheduled",
                 deliveryTime:
-                    pickup === "Standard" ? new Date(Date.now() + 20 * 60000).toISOString() : new Date(`${scheduleTime.date},${scheduleTime.time.split("-")[0]}`).toISOString(),
+                    pickup === "Standard"
+                        ? new Date(Date.now() + Number(restaurant?.totalDeliveryETA) * 60000).toISOString()
+                        : new Date(sheduleDate).toISOString(),
                 description: "Order for " + data.name,
                 orderStatus: "placed_order",
-                items: cartItems,
+                items: finalCart,
                 notes: data.notes,
                 userDetails: {
                     name: data.name,
@@ -125,13 +163,19 @@ const Delivery = () => {
         },
         onSuccess: (data) => {
             toast("Order created successfully");
+            if (data?.orderType === 2) {
+                localStorage.setItem("totalAmount", data?.totalAmount.toString());
+            }
+            if (data?.orderType === 2 && deliveryCharge !== null) {
+                const totalAmount = data.totalAmount + deliveryCharge;
+                localStorage.setItem("totalAmount", totalAmount.toString());
+            }
             router.push("/payment/" + data._id);
         },
         onError: (error: errordata) => {
             toast.error(error?.response?.data?.msg);
         },
     });
-
     useEffect(() => {
         const localpickup = localStorage.getItem("delivery");
         if (localpickup) {
@@ -146,7 +190,6 @@ const Delivery = () => {
             form.setValue("pinCode", parsedPickup.pinCode as string);
             if (parsedPickup.pickup) {
                 setPickUp(parsedPickup.pickup);
-                console.log(parsedPickup.pickup, "====parsedPickup");
                 if (parsedPickup.pickup === "Standard") {
                     setScheduleTime({
                         date: "",
@@ -154,16 +197,10 @@ const Delivery = () => {
                     } as ScheduleTime);
                 }
             }
-            if (
-                (parsedPickup?.scheduleTime as ScheduleTime) &&
-                parsedPickup?.scheduleTime?.date &&
-                parsedPickup.scheduleTime.time &&
-                parsedPickup.scheduleTime.date.length > 0 &&
-                parsedPickup.scheduleTime.time.length > 0
-            ) {
+            if ((parsedPickup?.scheduleTime as ScheduleTime) && parsedPickup.scheduleTime.date !== undefined && parsedPickup.scheduleTime.time !== undefined) {
                 setScheduleTime({
-                    date: parsedPickup.scheduleTime.date,
-                    time: parsedPickup.scheduleTime.time,
+                    date: parsedPickup?.scheduleTime?.date?.toString(),
+                    time: parsedPickup?.scheduleTime?.time?.toString(),
                 } as ScheduleTime);
             }
         }
@@ -184,14 +221,52 @@ const Delivery = () => {
                     time: scheduleTime.time,
                     date: scheduleTime.date,
                 },
-                pickup: pickup,
+                pickup: scheduleTime.time ? "Schedule" : "Standard",
             })
         );
     }, [form.watch("name"), scheduleTime, form.watch("phone"), form.watch("email"), form.watch("notes"), form, pickup]);
 
+    useEffect(() => {
+        if (scheduleTime.time) {
+            setPickUp("Schedule");
+        }
+    }, [scheduleTime.time]);
+
     const onSubmit = (data: FormData) => {
         mutate(data);
     };
+
+    const { mutate: postMutate } = useMutation({
+        mutationFn: async () => {
+            const res: AxiosResponse<{
+                data: {
+                    deliveryCharge: number;
+                };
+            }> = await axios.post(`${apiUrl}/orders/delivery-charge`, {
+                _idRestaurant: restaurant?._id,
+                shippingPincode: form.watch("pinCode"),
+            });
+
+            return res.data.data;
+        },
+        onSuccess: (data) => {
+            // toast("Added Delivery Charge");
+            setDeliveryCharge(data?.deliveryCharge);
+        },
+        onError: () => {
+            setDeliveryCharge(null);
+            // toast.error(error?.response?.data?.msg);
+        },
+    });
+
+    useEffect(() => {
+        if (form.watch("pinCode")?.length >= 5 && form.watch("pinCode")?.length <= 8) {
+            postMutate();
+        } else {
+            setDeliveryCharge(null);
+        }
+    }, [form.watch("pinCode")]);
+
     return (
         <div>
             <Form {...form}>
@@ -201,14 +276,18 @@ const Delivery = () => {
                         <div className="flex w-full flex-col gap-3 px-1 py-1">
                             <div
                                 className={cn("flex w-full items-center gap-3 border-[2px] border-borderinput px-4 py-3 lg:w-2/3", pickup === "Standard" && "border-menuprimary")}
-                                onClick={() => setPickUp("Standard")}
+                                onClick={() => {
+                                    setPickUp("Standard");
+                                    setScheduleTime({
+                                        date: "",
+                                        time: "",
+                                    } as ScheduleTime);
+                                }}
                             >
-                                <Calendar />
+                                <Calendar stroke="#FFF"/>
                                 <div className="flex flex-col">
                                     <p className="text-lg font-semibold text-menusecondary">Standard</p>
-                                    <p className="text-menuprimary-foreground">
-                                        {restaurant?.busyMode ? restaurant?.deliveryETA + restaurant.busyModeTime : restaurant?.deliveryETA} min
-                                    </p>
+                                    <p className="text-menuprimary-foreground">{restaurant?.totalDeliveryETA} min</p>
                                 </div>
                             </div>
                             <ScheduleTImePopup setScheduleTime={setScheduleTime} orderType="Delivery">
@@ -217,9 +296,8 @@ const Delivery = () => {
                                         "flex w-full items-center gap-3 border-[2px] border-borderinput px-4 py-3 lg:w-2/3",
                                         pickup === "Schedule" && "border-menuprimary"
                                     )}
-                                    onClick={() => setPickUp("Schedule")}
                                 >
-                                    <CalendarClock />
+                                    <CalendarClock stroke="#FFF"/>
                                     <div className="flex flex-col">
                                         <p className="text-lg font-semibold text-menusecondary">Schedule</p>
                                         <p className="text-menuprimary-foreground">
@@ -245,7 +323,7 @@ const Delivery = () => {
                                             <Input
                                                 placeholder="Name"
                                                 {...field}
-                                                className="h-12 rounded-none border-b-[3px] border-l-0 border-r-0 border-t-0 border-b-borderinput bg-inputbg outline-none placeholder:text-placeholder focus-visible:border-b-[2px] focus-visible:border-b-menuprimary focus-visible:ring-0"
+                                                className="h-12 rounded-none border-b-[3px] border-l-0 border-r-0 border-t-0 border-b-borderinput bg-inputbg outline-none placeholder:text-placeholder focus-visible:border-b-[2px] focus-visible:border-b-menuprimary focus-visible:ring-0 text-white"
                                             />
                                         </FormControl>
                                         <FormMessage />
@@ -261,7 +339,7 @@ const Delivery = () => {
                                             <Input
                                                 placeholder="Phone Number"
                                                 {...field}
-                                                className="h-12 rounded-none border-b-[3px] border-l-0 border-r-0 border-t-0 border-b-borderinput bg-inputbg outline-none placeholder:text-placeholder focus-visible:border-b-[2px] focus-visible:border-b-menuprimary focus-visible:ring-0"
+                                                className="h-12 rounded-none border-b-[3px] border-l-0 border-r-0 border-t-0 border-b-borderinput bg-inputbg outline-none placeholder:text-placeholder focus-visible:border-b-[2px] focus-visible:border-b-menuprimary focus-visible:ring-0 text-white"
                                             />
                                         </FormControl>
                                         <FormMessage />
@@ -277,7 +355,7 @@ const Delivery = () => {
                                             <Input
                                                 placeholder="Email ID"
                                                 {...field}
-                                                className="h-12 rounded-none border-b-[3px] border-l-0 border-r-0 border-t-0 border-b-borderinput bg-inputbg outline-none placeholder:text-placeholder focus-visible:border-b-[2px] focus-visible:border-b-menuprimary focus-visible:ring-0"
+                                                className="h-12 rounded-none border-b-[3px] border-l-0 border-r-0 border-t-0 border-b-borderinput bg-inputbg outline-none placeholder:text-placeholder focus-visible:border-b-[2px] focus-visible:border-b-menuprimary focus-visible:ring-0 text-white"
                                             />
                                         </FormControl>
                                         <FormMessage />
@@ -301,7 +379,7 @@ const Delivery = () => {
                                             <Input
                                                 placeholder="Building/House/flat No/floor"
                                                 {...field}
-                                                className="h-12 rounded-none border-b-[3px] border-l-0 border-r-0 border-t-0 border-b-borderinput bg-inputbg outline-none placeholder:text-placeholder focus-visible:border-b-[2px] focus-visible:border-b-menuprimary focus-visible:ring-0"
+                                                className="h-12 rounded-none border-b-[3px] border-l-0 border-r-0 border-t-0 border-b-borderinput bg-inputbg outline-none placeholder:text-placeholder focus-visible:border-b-[2px] focus-visible:border-b-menuprimary focus-visible:ring-0 text-white"
                                             />
                                         </FormControl>
                                         <FormMessage />
@@ -317,7 +395,7 @@ const Delivery = () => {
                                             <Input
                                                 placeholder="City"
                                                 {...field}
-                                                className="h-12 rounded-none border-b-[3px] border-l-0 border-r-0 border-t-0 border-b-borderinput bg-inputbg outline-none placeholder:text-placeholder focus-visible:border-b-[2px] focus-visible:border-b-menuprimary focus-visible:ring-0"
+                                                className="h-12 rounded-none border-b-[3px] border-l-0 border-r-0 border-t-0 border-b-borderinput bg-inputbg outline-none placeholder:text-placeholder focus-visible:border-b-[2px] focus-visible:border-b-menuprimary focus-visible:ring-0 text-white"
                                             />
                                         </FormControl>
                                         <FormMessage />
@@ -333,7 +411,7 @@ const Delivery = () => {
                                             <Input
                                                 placeholder="PostCode"
                                                 {...field}
-                                                className="h-12 rounded-none border-b-[3px] border-l-0 border-r-0 border-t-0 border-b-borderinput bg-inputbg outline-none placeholder:text-placeholder focus-visible:border-b-[2px] focus-visible:border-b-menuprimary focus-visible:ring-0"
+                                                className="h-12 rounded-none border-b-[3px] border-l-0 border-r-0 border-t-0 border-b-borderinput bg-inputbg outline-none placeholder:text-placeholder focus-visible:border-b-[2px] focus-visible:border-b-menuprimary focus-visible:ring-0 text-white"
                                             />
                                         </FormControl>
                                         <FormMessage />
@@ -350,7 +428,7 @@ const Delivery = () => {
                                             Packing/Delivery Instructions
                                         </FormLabel>
                                         <FormControl>
-                                            <Textarea rows={3} className="border-none bg-inputbg placeholder:text-placeholder lg:w-4/5" {...field} />
+                                            <Textarea rows={3} className="border-none bg-inputbg placeholder:text-placeholder lg:w-4/5 text-white" {...field} />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
