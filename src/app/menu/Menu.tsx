@@ -220,66 +220,7 @@ export default function Menu() {
             {/* {(!restaurant?.isTakeAwayEnabled && restaurant?.isDeliveryEnabled) && (
                 <DeliveryCheck setOrderType={setOrderType} />
             )} */}
-<<<<<<< HEAD
             <div className="flex w-full flex-col gap-4 md:w-4/6">
-=======
-      <div className="flex w-full flex-col gap-4 md:w-4/6">
-        <div
-          className="relative hidden h-[30vh] w-full bg-black md:flex"
-          style={{
-            background:
-              "linear-gradient(170deg, rgba(0, 0, 0, 0.00) 7.51%, rgba(0, 0, 0, 0.80) 92.93%), url('/images/about-us/1.jpg') lightgray 50% / cover no-repeat",
-          }}
-        >
-          <div className="absolute left-0 top-0 flex h-full w-full items-end justify-end px-12 py-12">
-            <Link href="/pdf/Main_Menu.pdf" target="_blank">
-              <Button className="flex items-center justify-center gap-2 rounded-none bg-menuprimary px-5 py-6 text-lg font-[600] text-menuforeground hover:bg-buttonhover">
-                <Image src="/images/pdf.svg" width={23} height={29} alt="pdf" />
-                <span className="leading-none">Download Menu</span>
-              </Button>
-            </Link>
-          </div>
-        </div>
-        {/* Categories */}
-        <div className="sticky top-0 z-10 flex items-center bg-transparent px-4 py-2">
-          <div
-            ref={categoryNavRef}
-            className="hidden-scrollbar flex overflow-x-auto py-2"
-          >
-            <div className="flex gap-4">
-              {organizedMenu.map((category) => {
-                if (activeCategory === category._id) {
-                  setlocalstorage(category._id);
-                }
-                return category.items.length > 0 ? (
-                  <Button
-                    key={category._id}
-                    ref={(el) => {
-                      categoryButtonRefs.current[category._id] = el;
-                    }}
-                    onClick={() => scrollToCategory(category._id)}
-                    className={cn(
-                      "shrink-0 rounded-none font-semibold transition-colors",
-                      activeCategory === category._id
-                        ? "bg-menuprimary text-menuforeground hover:bg-buttonhover"
-                        : "border-[1px] border-menuprimary bg-transparent text-menuprimary hover:bg-menuprimary hover:text-menuforeground",
-                      // existCategory.find((categoryid) => categoryid === category._id) !== category._id && "hidden w-0 border-0 px-0 py-0"
-                      // category.items.length === 0 && "hidden pb-0 h-0 border-0 px-0 py-0"
-                    )}
-                  >
-                    {category.name}
-                  </Button>
-                ) : null;
-              })}
-            </div>
-          </div>
-        </div>
-        {/* Items */}
-        <div className="px-4">
-          <div className="flex flex-col">
-            {organizedMenu.map((category) => {
-              return category.items.length > 0 ? (
->>>>>>> 0a7da99e7ded1544bda6912b23f25989ab85a745
                 <div
                     className="relative hidden h-[30vh] w-full bg-black md:flex"
                     style={{
