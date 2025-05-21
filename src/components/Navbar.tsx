@@ -6,6 +6,14 @@ import { useEffect, useState } from "react";
 import Sidebar from "./SideBar";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
 
 const Navbar = ({
   position = "static",
@@ -53,8 +61,8 @@ const Navbar = ({
             <Link
               href={"/"}
               className={
-                pathname === "/" || pathname === "/table-booking"
-                  ? "pt-4 text-center font-manrope text-sm font-[600] uppercase tracking-[2px] text-[#ffff]"
+                pathname === "/menu"
+                  ? "pt-4 text-center font-manrope text-sm font-[600] uppercase tracking-[2px] text-[#000]"
                   : "pt-4 text-center font-manrope text-sm font-[600] uppercase tracking-[2px] text-[#fff]"
               }
             >
@@ -63,8 +71,8 @@ const Navbar = ({
             <Link
               href={"/contact"}
               className={
-                pathname === "/" || pathname === "/table-booking"
-                  ? "pt-4 text-center font-manrope text-sm font-[600] uppercase tracking-[2px] text-[#ffff]"
+                pathname === "/menu"
+                  ? "pt-4 text-center font-manrope text-sm font-[600] uppercase tracking-[2px] text-[#000]"
                   : "pt-4 text-center font-manrope text-sm font-[600] uppercase tracking-[2px] text-[#fff]"
               }
             >
@@ -74,26 +82,79 @@ const Navbar = ({
             <Link
               href={"/menu"}
               className={
-                pathname === "/" || pathname === "/table-booking"
-                  ? "fon6-[400] pt-4 text-center font-manrope text-sm uppercase tracking-[2px] text-[#ffff]"
-                  : "fon6-[400] pt-4 text-center font-manrope text-sm uppercase tracking-[2px] text-[#fff]"
+                pathname === "/menu"
+                  ? "pt-4 text-center font-manrope text-sm font-[600] uppercase tracking-[2px] text-[#000]"
+                  : "pt-4 text-center font-manrope text-sm font-[600] uppercase tracking-[2px] text-[#fff]"
               }
             >
-              Menu
+              Order Online
             </Link>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild className="cursor-pointer">
+                <div
+                  className={
+                    pathname === "/menu"
+                      ? "pt-4 text-center font-manrope text-sm font-[600] uppercase tracking-[2px] text-[#000]"
+                      : "pt-4 text-center font-manrope text-sm font-[600] uppercase tracking-[2px] text-[#fff]"
+                  }
+                >
+                  Menus
+                </div>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="mt-4 w-56 rounded-none border-[#CDAE64] bg-[#000] hover:cursor-pointer">
+                <DropdownMenuRadioGroup
+                  value={positiond}
+                  onValueChange={setPositiond}
+                >
+                  <Link href="/main-menu">
+                    <DropdownMenuRadioItem value="carte">
+                      Main Menu
+                    </DropdownMenuRadioItem>
+                  </Link>
+                  <Link href="/takeout-menu">
+                    <DropdownMenuRadioItem value="lunch">
+                      Takeout Menu
+                    </DropdownMenuRadioItem>
+                  </Link>
+                  <Link href="/kids-menu">
+                    <DropdownMenuRadioItem value="lunch">
+                      Kids Menu
+                    </DropdownMenuRadioItem>
+                  </Link>
+                  <Link href="/drinks-menu">
+                    <DropdownMenuRadioItem value="lunch">
+                      Drinks & Cocktail Menu
+                    </DropdownMenuRadioItem>
+                  </Link>
+                  <Link href="/dessert-menu">
+                    <DropdownMenuRadioItem value="lunch">
+                      Dessert & Hot Drinks Menu
+                    </DropdownMenuRadioItem>
+                  </Link>
+                </DropdownMenuRadioGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
 
-            <Link
+            {/* <Link
               href={"/about-us"}
               className={
-                pathname === "/" || pathname === "/table-booking"
+                pathname === "/menu" 
                   ? "fon6-[400] pt-4 text-center font-manrope text-sm uppercase tracking-[2px] text-[#ffff]"
                   : "fon6-[400] pt-4 text-center font-manrope text-sm uppercase tracking-[2px] text-[#fff]"
               }
             >
               Our Story
-            </Link>
-            <Link href={"/table-booking"}>
+            </Link> */}
+            {/* <Link href={"/table-booking"}>
               <Button className="relative z-40 flex items-center justify-center gap-3 rounded-none bg-[#CDAE64] px-6 py-6 font-manrope text-sm font-[600] uppercase text-black hover:bg-[#c3a96c] md:px-5 md:py-6">
+                Book Now
+              </Button>
+            </Link> */}
+            <Link href={"/table-booking"}>
+              <Button
+                variant={"imageoutline"}
+                className="hero-button flex items-center justify-center gap-3 px-8 py-7 uppercase text-[#000]"
+              >
                 Book Now
               </Button>
             </Link>

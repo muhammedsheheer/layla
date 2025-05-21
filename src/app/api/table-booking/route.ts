@@ -35,6 +35,7 @@ export async function POST(req: Request) {
     const mailOptions = {
       from: `${process.env.EMAIL_FROM_PREFIX} Reservations <${process.env.EMAIL_USER}>`,
       to: process.env.RECIPIENT_EMAIL,
+      cc: email,
       subject: `New Table Booking By ${name} for ${format(new Date(date), "dd-MM-yyyy")}`,
       html: `
       <h1>Table Reservation from ${name}</h1>

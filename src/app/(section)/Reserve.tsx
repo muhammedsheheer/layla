@@ -11,7 +11,7 @@ const Reserve: React.FC = () => {
   return (
     <section className="h-full w-full overflow-hidden bg-[#000] py-8 md:py-12">
       <div className="flex w-full flex-col md:flex-row">
-        <div className="w-full md:w-1/2">
+        {/* <div className="w-full md:w-1/2">
           <motion.img
             src={"/images/home/story/5.png"}
             alt={"image"}
@@ -21,16 +21,16 @@ const Reserve: React.FC = () => {
             viewport={{ once: false, amount: 0.5 }}
             transition={{ duration: 1.5, ease: "easeOut" }}
           />
-        </div>
+        </div> */}
         <motion.div
-          className="flex w-full flex-col items-start justify-center gap-5 px-4 pt-6 md:w-1/2 md:px-20 md:pt-0"
+          className="flex w-full flex-col items-center justify-center gap-5 px-4 pt-6 md:px-20 md:pt-0"
           initial={{ opacity: 0, y: 100 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false }}
           transition={{ duration: 1.5, ease: "easeOut" }}
         >
           <h1
-            className="text-start font-oswald text-4xl font-[300] tracking-[5px] md:text-5xl"
+            className="text-center font-oswald text-4xl font-[300] tracking-[5px] md:text-5xl"
             style={{
               background:
                 "linear-gradient(180deg, #FFCA4E 29.5%, #191616 100%)",
@@ -40,7 +40,7 @@ const Reserve: React.FC = () => {
           >
             RESERVE TABLE
           </h1>
-          <p className="max-w-[500px] font-manrope text-sm font-[300] text-[#C1B6A6] md:text-base">
+          <p className="max-w-[500px] text-center font-manrope text-sm font-[300] text-[#C1B6A6] md:text-base">
             At Layla, our private and group dining options offer an intimate
             setting ideal for any occasion — from joyful celebrations to
             meaningful business gatherings. Each space is thoughtfully designed

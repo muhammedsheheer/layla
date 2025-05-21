@@ -136,25 +136,24 @@ const Contact = ({}) => {
                 <div className="flex flex-col gap-4">
                   <Link
                     className="font-poppins text-[#9C9E9F]"
-                    href={"mailto:Laylarestaurantuk@gmail.com"}
+                    href={"mailto:Info@laylarestaurant.co.uk"}
                   >
-                    Laylarestaurantuk@gmail.com
+                    Info@laylarestaurant.co.uk
                   </Link>
                 </div>
               </div>
               <div className="flex items-center justify-start gap-4">
-                {/* <Link
-                  href={"https://www.instagram.com/istanbulgrillculcheth/"}
+                <Link
+                  href={
+                    "https://www.instagram.com/laylarestaurant.uk?utm_source=qr&igsh=NmdpbDdmZHBkMDYy"
+                  }
                   target="_blank"
                 >
                   <Icons.instagram className="text-[#9C9E9F]" />
-                </Link> */}
-                {/* <Link
-                  href={"https://www.facebook.com/istanbulgrillculcheth/"}
-                  target="_blank"
-                >
+                </Link>
+                <Link href={""} target="_blank">
                   <Icons.facebook className="text-[#9C9E9F]" />
-                </Link> */}
+                </Link>
                 <Link href={"https://g.co/kgs/KBMNsyS"} target="_blank">
                   <Icons.google className="text-[#9C9E9F]" />
                 </Link>

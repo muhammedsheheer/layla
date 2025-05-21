@@ -68,14 +68,15 @@ function About() {
           transition={{ duration: 1.5, ease: "easeOut" }}
         >
           <p className="z-40 max-w-[400px] font-inter text-sm font-[400] text-[#7E6C53] md:text-base">
-            At Layla, our menu is a heartfelt tribute to the rich culinary
-            heritage of Syria. Every dish is thoughtfully prepared with
-            authenticity, care, and a deep love for traditional Syrian flavors.
-            Our talented chefs carry forward generations of Syrian cooking,
-            using the freshest local ingredients to craft meals that are both
-            vibrant and soulful. We invite you to experience the warmth,
-            hospitality, and unforgettable tastes of Layla — where every plate
-            tells a story of Syria’s culture, love, and timeless tradition.
+            We are Layla Restaurant and our mission is to share the culinary
+            delights of the Middle East with you in the heart of Culcheth.
+            Authentic Lebanese and Syrian dishes prepared with love and care,
+            using only the freshest, carefully sourced, quality ingredients.
+            Tender meat and fish chargrilled to perfection over a traditional
+            open grill, as well as a wide range of hot and cold mezze with
+            plenty of delicious vegetarian options. Special occasions, casual
+            dining, groups and takeaway available from our friendly
+            neighbourhood restaurant.
           </p>
           <div className="flex flex-col gap-3">
             <p className="max-w-[400px] font-inter text-sm font-[400] text-[#7E6C53] md:text-base">
@@ -83,10 +84,18 @@ function About() {
               spirit of our homeland. Come, savor the journey with us at Layla,
               where tradition and flavor come together in every dish.
             </p>
-            <div>
-              <Link href={"/table-booking"}>
+            <div className="pt-4">
+              {/* <Link href={"/table-booking"}>
                 <Button className="relative z-40 flex items-center justify-center gap-3 rounded-none bg-[#CDAE64] px-6 py-6 font-manrope text-sm font-[600] uppercase text-black hover:bg-[#c3a96c] md:px-5 md:py-6">
                   Order Now
+                </Button>
+              </Link> */}
+              <Link href="/table-booking">
+                <Button
+                  className="hero-button flex items-center justify-center gap-3 px-8 py-7 uppercase text-[#000]"
+                  variant="imageoutline"
+                >
+                  Book Your Table
                 </Button>
               </Link>
             </div>

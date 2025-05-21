@@ -1,3 +1,4 @@
+"use client";
 import {
   Sheet,
   SheetContent,
@@ -8,13 +9,33 @@ import {
 } from "@/components/ui/sheet";
 import Image from "next/image";
 import Link from "next/link";
-import { type FC } from "react";
+import { useEffect, useState, type FC } from "react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
 
 interface SidebarProps {
   children: React.ReactNode;
 }
 
 const Sidebar: FC<SidebarProps> = ({ children }) => {
+  useEffect(() => {
+    const d = localStorage.getItem("positiond");
+    if (d !== null) {
+      setPositiond(d);
+    }
+  }, []);
+  const [positiond, setPositiond] = useState<string>("");
+  useEffect(() => {
+    if (positiond) {
+      localStorage.setItem("positiond", positiond);
+    }
+  }, [positiond]);
   return (
     <Sheet>
       <SheetTrigger asChild>{children}</SheetTrigger>
@@ -32,37 +53,76 @@ const Sidebar: FC<SidebarProps> = ({ children }) => {
           <SheetDescription className="flex w-full flex-col items-center justify-center gap-7 pt-14">
             <Link
               href="/"
-              className="flex w-full justify-center p-0 text-center font-manrope text-4xl font-normal text-white"
+              className="flex w-full justify-center p-0 text-center font-times_new_roman text-3xl font-normal text-white"
             >
               Home
             </Link>
             <Link
               href="/menu"
-              className="flex w-full justify-center p-0 text-center font-manrope text-4xl font-normal text-white"
+              className="flex w-full justify-center p-0 text-center font-times_new_roman text-3xl font-normal text-white"
             >
-              Menu
+              Order Online
             </Link>
-            <Link
+            {/* <Link
               href="/about-us"
-              className="flex w-full justify-center p-0 text-center font-manrope text-4xl font-normal text-white"
+              className="flex w-full justify-center p-0 text-center font-times_new_roman text-3xl font-normal text-white"
             >
               Our Story
-            </Link>
+            </Link> */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild className="cursor-pointer">
+                <div className="flex w-full justify-center p-0 text-center font-times_new_roman text-3xl font-normal text-white">
+                  Menus
+                </div>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="mt-4 w-56 rounded-none border-[#CDAE64] bg-[#000] hover:cursor-pointer">
+                <DropdownMenuRadioGroup
+                  value={positiond}
+                  onValueChange={setPositiond}
+                >
+                  <Link href="/main-menu">
+                    <DropdownMenuRadioItem value="carte">
+                      Main Menu
+                    </DropdownMenuRadioItem>
+                  </Link>
+                  <Link href="/takeout-menu">
+                    <DropdownMenuRadioItem value="lunch">
+                      Takeout Menu
+                    </DropdownMenuRadioItem>
+                  </Link>
+                  <Link href="/kids-menu">
+                    <DropdownMenuRadioItem value="lunch">
+                      Kids Menu
+                    </DropdownMenuRadioItem>
+                  </Link>
+                  <Link href="/drinks-menu">
+                    <DropdownMenuRadioItem value="lunch">
+                      Drinks & Cocktail Menu
+                    </DropdownMenuRadioItem>
+                  </Link>
+                  <Link href="/dessert-menu">
+                    <DropdownMenuRadioItem value="lunch">
+                      Dessert & Hot Drinks Menu
+                    </DropdownMenuRadioItem>
+                  </Link>
+                </DropdownMenuRadioGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
             <Link
               href="/contact"
-              className="flex w-full justify-center p-0 text-center font-manrope text-4xl font-normal text-white"
+              className="flex w-full justify-center p-0 text-center font-times_new_roman text-3xl font-normal text-white"
             >
               Contact
             </Link>
             <Link
               href="/table-booking"
-              className="flex w-full justify-center p-0 text-center font-manrope text-4xl font-normal text-white"
+              className="flex w-full justify-center p-0 text-center font-times_new_roman text-3xl font-normal text-white"
             >
               Reservation
             </Link>
             {/* <Link
               href=""
-              className="font-playfair flex w-full justify-start p-0 text-4xl font-normal text-white"
+              className="font-playfair flex w-full justify-start p-0 text-3xl font-normal text-white"
             >
               Food & Drinks
             </Link> */}

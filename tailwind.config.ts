@@ -23,7 +23,7 @@ export default {
       },
       backgroundImage: {
         "button-bg": "url('/images/buttonbg.svg')",
-        "button-hover": "url('/images/buttonhover.svg')",
+        "button-hover": "url('/images/buttonhover.png')",
         "button-bg-inverted": "url('/images/buttonInvertedBg.png')",
         "button-bgB": "url('/images/buttonBlack.svg')",
       },
