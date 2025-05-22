@@ -101,7 +101,7 @@ const Gallery: React.FC = () => {
         </div>
         {/*mobile screen */}
         <div className="relative z-10 flex w-full flex-col gap-4 md:hidden">
-          <div className="absolute inset-0 z-0 flex items-center justify-center">
+          {/* <div className="absolute inset-0 z-0 flex items-center justify-center">
             <Image
               src={"/images/home/story/bg2.jpg"}
               width={281}
@@ -109,7 +109,7 @@ const Gallery: React.FC = () => {
               alt="logo"
               className="z-50 h-full w-full object-cover"
             />
-          </div>
+          </div> */}
           <div className="z-10 flex w-full flex-row gap-4">
             <div className="w-full md:w-[25%]">
               <motion.img
