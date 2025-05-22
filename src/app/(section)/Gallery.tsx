@@ -13,33 +13,25 @@ const Gallery: React.FC = () => {
 
       <div className="flex flex-col gap-10 md:gap-20">
         <div>
-          <h1
-            className="text-center font-times_new_roman text-7xl font-[400] tracking-[3px] md:text-[200px]"
-            style={{
-              background:
-                "linear-gradient(180deg, #CCAD64 29.5%, #191616 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-            }}
-          >
+          <h1 className="text-center font-times_new_roman text-7xl font-[400] tracking-[3px] text-[#fff] md:text-[200px]">
             Layla
           </h1>
         </div>
         {/* big screen */}
         <div className="relative z-10 hidden w-full flex-col gap-8 md:flex">
-          <div className="absolute inset-0 z-0 flex items-center justify-center">
+          {/* <div className="absolute inset-0 z-0 flex items-center justify-center">
             <Image
-              src={"/images/home/story/bg2.png"}
+              src={"/images/home/story/bg2.jpg"}
               width={281}
               height={74}
               alt="logo"
               className="z-50 h-full w-full object-cover"
             />
-          </div>
+          </div> */}
           <div className="z-10 flex w-full flex-row gap-6">
             <div className="w-full md:w-[25%]">
               <motion.img
-                src="/images/home/gallery/1.png"
+                src="/images/home/gallery/1.jpg"
                 alt="1"
                 className="z-50 h-[200px] w-full object-cover md:h-[400px]"
                 initial={{ opacity: 0, y: 50, scale: 0.8 }}
@@ -50,7 +42,7 @@ const Gallery: React.FC = () => {
             </div>
             <div className="w-full md:w-[50%]">
               <motion.img
-                src="/images/home/gallery/2.png"
+                src="/images/home/gallery/2.jpg"
                 alt="1"
                 className="z-50 h-[200px] w-full object-cover md:h-[400px]"
                 initial={{ opacity: 0, y: 50, scale: 0.8 }}
@@ -61,7 +53,7 @@ const Gallery: React.FC = () => {
             </div>
             <div className="w-full md:w-[25%]">
               <motion.img
-                src="/images/home/gallery/3.png"
+                src="/images/home/gallery/3.jpg"
                 alt="1"
                 className="z-50 h-[200px] w-full object-cover md:h-[400px]"
                 initial={{ opacity: 0, y: 50, scale: 0.8 }}
@@ -74,7 +66,7 @@ const Gallery: React.FC = () => {
           <div className="z-10 flex w-full flex-row gap-6">
             <div className="w-full md:w-[25%]">
               <motion.img
-                src="/images/home/gallery/4.png"
+                src="/images/home/gallery/4.jpg"
                 alt="1"
                 className="z-50 h-[200px] w-full object-cover md:h-[400px]"
                 initial={{ opacity: 0, y: 50, scale: 0.8 }}
@@ -85,7 +77,7 @@ const Gallery: React.FC = () => {
             </div>
             <div className="w-full md:w-[50%]">
               <motion.img
-                src="/images/home/gallery/5.png"
+                src="/images/home/gallery/5.jpg"
                 alt="1"
                 className="z-50 h-[200px] w-full object-cover md:h-[400px]"
                 initial={{ opacity: 0, y: 50, scale: 0.8 }}
@@ -96,7 +88,7 @@ const Gallery: React.FC = () => {
             </div>
             <div className="w-full md:w-[25%]">
               <motion.img
-                src="/images/home/gallery/6.png"
+                src="/images/home/gallery/6.jpg"
                 alt="1"
                 className="z-50 h-[200px] w-full object-cover md:h-[400px]"
                 initial={{ opacity: 0, y: 50, scale: 0.8 }}
@@ -111,7 +103,7 @@ const Gallery: React.FC = () => {
         <div className="relative z-10 flex w-full flex-col gap-4 md:hidden">
           <div className="absolute inset-0 z-0 flex items-center justify-center">
             <Image
-              src={"/images/home/story/bg2.png"}
+              src={"/images/home/story/bg2.jpg"}
               width={281}
               height={74}
               alt="logo"
@@ -121,7 +113,7 @@ const Gallery: React.FC = () => {
           <div className="z-10 flex w-full flex-row gap-4">
             <div className="w-full md:w-[25%]">
               <motion.img
-                src="/images/home/gallery/1.png"
+                src="/images/home/gallery/1.jpg"
                 alt="1"
                 className="z-50 h-[200px] w-full object-cover md:h-[400px]"
                 initial={{ opacity: 0, y: 50, scale: 0.8 }}
@@ -132,7 +124,7 @@ const Gallery: React.FC = () => {
             </div>
             <div className="w-full md:w-[50%]">
               <motion.img
-                src="/images/home/gallery/2.png"
+                src="/images/home/gallery/2.jpg"
                 alt="1"
                 className="z-50 h-[200px] w-full object-cover md:h-[400px]"
                 initial={{ opacity: 0, y: 50, scale: 0.8 }}
@@ -145,7 +137,7 @@ const Gallery: React.FC = () => {
           <div className="z-10 flex w-full flex-row gap-4">
             <div className="w-full md:w-[25%]">
               <motion.img
-                src="/images/home/gallery/4.png"
+                src="/images/home/gallery/4.jpg"
                 alt="1"
                 className="z-50 h-[200px] w-full object-cover md:h-[400px]"
                 initial={{ opacity: 0, y: 50, scale: 0.8 }}
@@ -156,7 +148,7 @@ const Gallery: React.FC = () => {
             </div>
             <div className="w-full md:w-[50%]">
               <motion.img
-                src="/images/home/gallery/5.png"
+                src="/images/home/gallery/5.jpg"
                 alt="1"
                 className="z-50 h-[200px] w-full object-cover md:h-[400px]"
                 initial={{ opacity: 0, y: 50, scale: 0.8 }}
@@ -169,7 +161,7 @@ const Gallery: React.FC = () => {
           <div className="z-10 flex w-full flex-row gap-4">
             <div className="w-full md:w-[50%]">
               <motion.img
-                src="/images/home/gallery/6.png"
+                src="/images/home/gallery/6.jpg"
                 alt="1"
                 className="z-50 h-[200px] w-full object-cover md:h-[400px]"
                 initial={{ opacity: 0, y: 50, scale: 0.8 }}
@@ -180,7 +172,7 @@ const Gallery: React.FC = () => {
             </div>
             <div className="w-full md:w-[25%]">
               <motion.img
-                src="/images/home/gallery/3.png"
+                src="/images/home/gallery/3.jpg"
                 alt="1"
                 className="z-50 h-[200px] w-full object-cover md:h-[400px]"
                 initial={{ opacity: 0, y: 50, scale: 0.8 }}

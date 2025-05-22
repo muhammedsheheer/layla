@@ -23,7 +23,7 @@ const buttonVariants = cva(
         imageB:
           "bg-no-repeat bg-center bg-contain bg-button-bgB text-black hover:bg-[#ffff] hover:text-[#fff]",
         imageoutline:
-          "bg-no-repeat bg-center bg-contain bg-button-hover text-white hover:bg-button-hover hover:text-white",
+          "bg-no-repeat bg-center bg-contain bg-button-hover text-white hover:bg-button-hover hover:text-[#111]",
         imageInverted:
           "bg-no-repeat bg-center bg-contain bg-button-bg-inverted ",
       },

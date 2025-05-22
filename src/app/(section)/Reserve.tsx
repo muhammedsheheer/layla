@@ -29,18 +29,10 @@ const Reserve: React.FC = () => {
           viewport={{ once: false }}
           transition={{ duration: 1.5, ease: "easeOut" }}
         >
-          <h1
-            className="text-center font-oswald text-4xl font-[300] tracking-[5px] md:text-5xl"
-            style={{
-              background:
-                "linear-gradient(180deg, #FFCA4E 29.5%, #191616 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-            }}
-          >
+          <h1 className="text-center font-oswald text-4xl font-[300] tracking-[5px] text-[#fff] md:text-5xl">
             RESERVE TABLE
           </h1>
-          <p className="max-w-[500px] text-center font-manrope text-sm font-[300] text-[#C1B6A6] md:text-base">
+          <p className="max-w-[500px] text-center font-manrope text-sm font-[300] text-[#fff] md:text-base">
             At Layla, our private and group dining options offer an intimate
             setting ideal for any occasion — from joyful celebrations to
             meaningful business gatherings. Each space is thoughtfully designed
@@ -51,8 +43,8 @@ const Reserve: React.FC = () => {
           </p>
           <div>
             <Link href={"/table-booking"}>
-              <Button className="relative z-40 flex flex-row items-center justify-center gap-1 rounded-none bg-transparent px-6 py-6 font-manrope text-sm font-[600] uppercase text-white ring-1 ring-[#D5A859] hover:bg-[#c3a96c] md:px-5 md:py-6">
-                Book Now <ArrowRight className="text-[#D5A859]" />
+              <Button className="relative z-40 flex flex-row items-center justify-center gap-1 rounded-none bg-transparent px-6 py-6 font-manrope text-sm font-[600] uppercase text-white ring-1 ring-[#fff] hover:bg-[#c3a96c] md:px-5 md:py-6">
+                Book Now <ArrowRight className="text-[#fff]" />
               </Button>
             </Link>
           </div>

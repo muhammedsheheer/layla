@@ -5,10 +5,10 @@ import React from "react";
 import { motion } from "framer-motion";
 
 const menuItems = [
-  { image: "/images/home/story/1.png" },
-  { image: "/images/home/story/2.png" },
-  { image: "/images/home/story/3.png" },
-  { image: "/images/home/story/4.png" },
+  { image: "/images/home/story/1.jpg" },
+  { image: "/images/home/story/2.jpg" },
+  { image: "/images/home/story/3.jpg" },
+  { image: "/images/home/story/4.jpg" },
 ];
 
 const Story: React.FC = () => {
@@ -24,14 +24,7 @@ const Story: React.FC = () => {
         />
       </div>
       <div className="absolute left-1/2 top-10 -translate-x-1/2 md:top-28">
-        <h1
-          className="text-center font-oswald text-4xl font-[300] tracking-[5px] md:text-5xl"
-          style={{
-            background: "linear-gradient(180deg, #FFCA4E 29.5%, #191616 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-          }}
-        >
+        <h1 className="text-center font-oswald text-4xl font-[300] tracking-[5px] text-[#fff] md:text-5xl">
           LAYLA SPECIALS
         </h1>
       </div>
@@ -63,7 +56,7 @@ const Story: React.FC = () => {
               <motion.img
                 src={item.image}
                 alt={"image"}
-                className="relative z-10 h-full w-full object-cover"
+                className="relative z-10 h-full w-full border border-[#b49f02] object-cover p-1 md:h-[600px]"
                 initial={{ opacity: 0, y: 50, scale: 0.8 }}
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: false, amount: 0.5 }}

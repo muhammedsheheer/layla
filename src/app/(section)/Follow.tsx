@@ -16,17 +16,11 @@ const Follow: React.FC = () => {
       <div className="hidden flex-col gap-8 md:flex md:gap-20">
         <div className="flex w-full flex-col gap-4 px-4 md:px-[60px] 2xl:px-[80px]">
           <motion.h5
-            className="pb-16 text-center font-oswald text-4xl font-[400] capitalize md:text-6xl"
+            className="pb-16 text-center font-oswald text-4xl font-[400] capitalize text-[#fff] md:text-6xl"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false }}
             transition={{ duration: 1.5, ease: "easeOut" }}
-            style={{
-              background:
-                "linear-gradient(180deg, #FFCC6B 29.5%, #35322D 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-            }}
           >
             Scroll Us
           </motion.h5>
@@ -34,7 +28,7 @@ const Follow: React.FC = () => {
             <div className="w-full md:w-[25%]">
               {" "}
               <motion.img
-                src={"/images/home/follow/1.png"}
+                src={"/images/home/follow/1.jpg"}
                 width={160}
                 height={160}
                 alt="logo"
@@ -72,15 +66,29 @@ const Follow: React.FC = () => {
                   layla
                 </Link>
               </div> */}
-              <Icons.instagram className="z-40 h-24 w-24 text-[#E2B583]" />
-              <span className="text-md text-center font-open_sans font-[400] uppercase text-[#E2B583] md:text-xl">
-                layla
-              </span>
+              <Link
+                href={
+                  "https://www.instagram.com/laylarestaurant.uk?utm_source=qr&igsh=NmdpbDdmZHBkMDYy"
+                }
+                target="_blank"
+              >
+                <Icons.instagram className="z-40 h-24 w-24 text-[#fff]" />
+              </Link>
+              <Link
+                href={
+                  "https://www.instagram.com/laylarestaurant.uk?utm_source=qr&igsh=NmdpbDdmZHBkMDYy"
+                }
+                target="_blank"
+              >
+                <span className="text-md text-center font-open_sans font-[400] uppercase text-[#fff] md:text-xl">
+                  layla
+                </span>
+              </Link>
             </motion.div>
             <div className="w-full md:w-[25%]">
               {" "}
               <motion.img
-                src={"/images/home/follow/2.png"}
+                src={"/images/home/follow/2.jpg"}
                 width={160}
                 height={160}
                 alt="logo"
@@ -94,7 +102,7 @@ const Follow: React.FC = () => {
             <div className="w-full md:w-[25%]">
               {" "}
               <motion.img
-                src={"/images/home/follow/3.png"}
+                src={"/images/home/follow/3.jpg"}
                 width={160}
                 height={160}
                 alt="logo"
@@ -110,7 +118,7 @@ const Follow: React.FC = () => {
             <div className="flex w-full items-center justify-center md:w-[25%]">
               {" "}
               <motion.img
-                src={"/images/home/follow/4.png"}
+                src={"/images/home/follow/4.jpg"}
                 width={160}
                 height={160}
                 alt="logo"
@@ -124,7 +132,7 @@ const Follow: React.FC = () => {
             <div className="w-full md:w-[50%]">
               {" "}
               <motion.img
-                src={"/images/home/follow/5.png"}
+                src={"/images/home/follow/5.jpg"}
                 width={160}
                 height={160}
                 alt="logo"
@@ -139,7 +147,7 @@ const Follow: React.FC = () => {
             <div className="z-0 flex w-full items-center justify-center md:w-[25%]">
               {" "}
               <motion.img
-                src={"/images/home/follow/6.png"}
+                src={"/images/home/follow/6.jpg"}
                 width={160}
                 height={160}
                 alt="logo"
@@ -157,17 +165,11 @@ const Follow: React.FC = () => {
       <div className="z-40 flex flex-col gap-8 md:hidden md:gap-20">
         <div className="z-40 flex w-full flex-col gap-4 px-4 md:px-[60px] 2xl:px-[80px]">
           <motion.h5
-            className="pb-10 text-center font-oswald text-4xl font-[400] capitalize md:text-6xl"
+            className="pb-10 text-center font-oswald text-4xl font-[400] capitalize text-[#fff] md:text-6xl"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false }}
             transition={{ duration: 1.5, ease: "easeOut" }}
-            style={{
-              background:
-                "linear-gradient(180deg, #FFCC6B 29.5%, #35322D 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-            }}
           >
             Scroll Us
           </motion.h5>
@@ -175,7 +177,7 @@ const Follow: React.FC = () => {
             <div className="w-full md:w-[25%]">
               {" "}
               <motion.img
-                src={"/images/home/follow/1.png"}
+                src={"/images/home/follow/1.jpg"}
                 width={160}
                 height={160}
                 alt="logo"
@@ -213,15 +215,29 @@ const Follow: React.FC = () => {
                   layla
                 </Link>
               </div> */}
-              <Icons.instagram className="z-40 h-24 w-24 text-[#E2B583]" />
-              <span className="text-md text-center font-open_sans font-[400] uppercase text-[#E2B583] md:text-xl">
-                layla
-              </span>
+              <Link
+                href={
+                  "https://www.instagram.com/laylarestaurant.uk?utm_source=qr&igsh=NmdpbDdmZHBkMDYy"
+                }
+                target="_blank"
+              >
+                <Icons.instagram className="z-40 h-24 w-24 text-[#fff]" />
+              </Link>
+              <Link
+                href={
+                  "https://www.instagram.com/laylarestaurant.uk?utm_source=qr&igsh=NmdpbDdmZHBkMDYy"
+                }
+                target="_blank"
+              >
+                <span className="text-md text-center font-open_sans font-[400] uppercase text-[#fff] md:text-xl">
+                  layla
+                </span>
+              </Link>
             </motion.div>
             <div className="w-full md:w-[25%]">
               {" "}
               <motion.img
-                src={"/images/home/follow/2.png"}
+                src={"/images/home/follow/2.jpg"}
                 width={160}
                 height={160}
                 alt="logo"
@@ -235,7 +251,7 @@ const Follow: React.FC = () => {
             <div className="w-full md:w-[25%]">
               {" "}
               <motion.img
-                src={"/images/home/follow/3.png"}
+                src={"/images/home/follow/3.jpg"}
                 width={160}
                 height={160}
                 alt="logo"
@@ -251,7 +267,7 @@ const Follow: React.FC = () => {
             <div className="flex w-full items-center justify-center md:w-[25%]">
               {" "}
               <motion.img
-                src={"/images/home/follow/4.png"}
+                src={"/images/home/follow/4.jpg"}
                 width={160}
                 height={160}
                 alt="logo"
@@ -265,7 +281,7 @@ const Follow: React.FC = () => {
             {/* <div className="w-full md:w-[50%]">
               {" "}
               <motion.img
-                src={"/images/home/follow/5.png"}
+                src={"/images/home/follow/5.jpg"}
                 width={160}
                 height={160}
                 alt="logo"
@@ -280,7 +296,7 @@ const Follow: React.FC = () => {
             <div className="z-0 flex w-full items-center justify-center md:w-[25%]">
               {" "}
               <motion.img
-                src={"/images/home/follow/6.png"}
+                src={"/images/home/follow/6.jpg"}
                 width={160}
                 height={160}
                 alt="logo"

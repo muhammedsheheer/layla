@@ -19,14 +19,14 @@ export default function HomePage() {
       <div className="flex h-full w-full flex-col items-center justify-center">
         <Navbar position="absolute" />
         <Hero />
-        {/* <Menu /> */}
+        <Menu />
         <About />
-        {/* <Story /> */}
+        <Story />
         <Special />
         <Reserve />
         {/* <Reviews /> */}
-        {/* <Gallery />
-        <Follow /> */}
+        <Gallery />
+        <Follow />
         <Footer />
       </div>
     </main>

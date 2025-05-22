@@ -67,7 +67,7 @@ export const PrevButton: React.FC<PropType> = (props) => {
       variant="outline"
       size="icon"
       className={cn(
-        "group/btn h-10 w-10 rounded-full border-0 border-[#C9AB81] bg-transparent text-[#C9AB81] hover:bg-primary",
+        "group/btn h-10 w-10 rounded-full border-0 border-[#fff] bg-transparent text-[#fff] hover:bg-primary",
         "-left-12 top-1/2 -translate-y-1/2",
       )}
       {...restProps}
@@ -75,12 +75,12 @@ export const PrevButton: React.FC<PropType> = (props) => {
       <div
         className="absolute inset-0 flex rounded-full bg-transparent group-hover/btn:hidden"
         style={{
-          border: `2px solid #C9AB81`,
+          border: `2px solid #fff`,
           transition: "clip-path 0.4s ease-in-out",
           transform: "rotate(160deg)",
         }}
       />
-      <ArrowLeftIcon className="h-5 w-5 text-[#C9AB81]" />
+      <ArrowLeftIcon className="h-5 w-5 text-[#fff]" />
       <span className="sr-only">Previous slide</span>
     </Button>
   );
@@ -94,7 +94,7 @@ export const NextButton: React.FC<PropType> = (props) => {
       variant="outline"
       size="icon"
       className={cn(
-        "group/btn h-10 w-10 rounded-full border-0 border-[#C9AB81] bg-transparent text-[#C9AB81] hover:bg-primary",
+        "group/btn h-10 w-10 rounded-full border-0 border-[#fff] bg-transparent text-[#fff] hover:bg-primary",
         "-right-12 top-1/2 -translate-y-1/2",
       )}
       {...restProps}
@@ -102,12 +102,12 @@ export const NextButton: React.FC<PropType> = (props) => {
       <div
         className="absolute inset-0 flex rounded-full group-hover/btn:hidden"
         style={{
-          border: `2px solid #C9AB81`,
+          border: `2px solid #fff`,
           transition: "clip-path 0.4s ease-in-out",
           transform: "rotate(-20deg)",
         }}
       />
-      <ArrowRightIcon className="h-5 w-5 text-[#C9AB81]" />
+      <ArrowRightIcon className="h-5 w-5 text-[#fff]" />
       <span className="sr-only">Next slide</span>
     </Button>
   );

@@ -18,14 +18,7 @@ const Special = ({}) => {
         <div className="line"></div>
       </div>
       <div className="absolute left-36 top-28 hidden md:block">
-        <h6
-          className="text-start font-times_new_roman text-4xl font-[400] uppercase md:text-4xl"
-          style={{
-            background: "linear-gradient(180deg, #FFCC6B 29.5%, #35322D 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-          }}
-        >
+        <h6 className="text-start font-times_new_roman text-4xl font-[400] uppercase text-[#fff] md:text-4xl">
           LAYLA <br />
           Signature <br />
           SPECIALS
@@ -37,13 +30,7 @@ const Special = ({}) => {
           <div className="flex w-full flex-col items-center justify-center gap-2">
             <div className="relative flex w-full flex-col items-center justify-center gap-2">
               <motion.h6
-                className="text-center font-times_new_roman text-4xl font-[400] uppercase md:hidden md:text-5xl"
-                style={{
-                  background:
-                    "linear-gradient(180deg, #FFCC6B 29.5%, #35322D 100%)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                }}
+                className="text-center font-times_new_roman text-4xl font-[400] uppercase text-[#fff] md:hidden md:text-5xl"
                 initial={{ y: 50, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: false, amount: 0.5 }}
