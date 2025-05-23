@@ -1,24 +1,16 @@
-"use client";
 import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
 const Page = () => {
   return (
-    <section className="h-full w-full bg-[#ede8e8] px-4 py-8 md:px-60 md:py-20 2xl:px-80">
+    <section className="z-50 h-full w-full bg-[#ede8e8] px-4 py-8 md:px-60 md:py-20 2xl:px-80">
       <div className="flex flex-col items-center justify-center gap-4">
         <div className="mb-6 flex flex-col items-center justify-center gap-2 md:mb-8">
-          <motion.h1
-            className="text-center font-times_new_roman text-4xl font-[400] capitalize tracking-[3px] md:text-7xl"
-            initial={{ opacity: 0, y: 100 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false }}
-            transition={{ duration: 1.5, ease: "easeOut" }}
-          >
+          <h1 className="text-center font-times_new_roman text-4xl font-[400] capitalize tracking-[3px] md:text-7xl">
             Layla Takeout Menu
-          </motion.h1>
+          </h1>
           <Link href={"/pdf/Takeout_Menu.pdf"} target="_blank">
             <Button
               variant={"imageoutline"}

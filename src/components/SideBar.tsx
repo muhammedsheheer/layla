@@ -18,6 +18,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
+import { usePathname } from "next/navigation";
 
 interface SidebarProps {
   children: React.ReactNode;
@@ -36,6 +37,16 @@ const Sidebar: FC<SidebarProps> = ({ children }) => {
       localStorage.setItem("positiond", positiond);
     }
   }, [positiond]);
+  const pathname = usePathname();
+
+  const [positiondn, setPositiondn] = useState(() => {
+    if (pathname.includes("main-menu")) return "main-menu";
+    if (pathname.includes("takeout-menu")) return "takeout-menu";
+    if (pathname.includes("kids-menu")) return "kids-menu";
+    if (pathname.includes("drinks-menu")) return "drinks-menu";
+    if (pathname.includes("dessert-menu")) return "dessert-menu";
+    return "";
+  });
   return (
     <Sheet>
       <SheetTrigger asChild>{children}</SheetTrigger>
@@ -69,7 +80,7 @@ const Sidebar: FC<SidebarProps> = ({ children }) => {
             >
               Our Story
             </Link> */}
-            <DropdownMenu>
+            {/* <DropdownMenu>
               <DropdownMenuTrigger asChild className="cursor-pointer">
                 <div className="flex w-full justify-center p-0 text-center font-times_new_roman text-3xl font-normal text-white">
                   Menus
@@ -102,6 +113,46 @@ const Sidebar: FC<SidebarProps> = ({ children }) => {
                   </Link>
                   <Link href="/dessert-menu">
                     <DropdownMenuRadioItem value="lunch">
+                      Dessert & Hot Drinks Menu
+                    </DropdownMenuRadioItem>
+                  </Link>
+                </DropdownMenuRadioGroup>
+              </DropdownMenuContent>
+            </DropdownMenu> */}
+
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild className="cursor-pointer">
+                <div className="flex w-full justify-center p-0 text-center font-times_new_roman text-3xl font-normal text-white">
+                  Menus
+                </div>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="mt-4 w-56 rounded-none border-[#CDAE64] bg-[#000] hover:cursor-pointer">
+                <DropdownMenuRadioGroup
+                  value={positiondn}
+                  onValueChange={setPositiondn}
+                >
+                  <Link href="/main-menu">
+                    <DropdownMenuRadioItem value="main-menu">
+                      Main Menu
+                    </DropdownMenuRadioItem>
+                  </Link>
+                  <Link href="/takeout-menu">
+                    <DropdownMenuRadioItem value="takeout-menu">
+                      Takeout Menu
+                    </DropdownMenuRadioItem>
+                  </Link>
+                  <Link href="/kids-menu">
+                    <DropdownMenuRadioItem value="kids-menu">
+                      Kids Menu
+                    </DropdownMenuRadioItem>
+                  </Link>
+                  <Link href="/drinks-menu">
+                    <DropdownMenuRadioItem value="drinks-menu">
+                      Drinks & Cocktail Menu
+                    </DropdownMenuRadioItem>
+                  </Link>
+                  <Link href="/dessert-menu">
+                    <DropdownMenuRadioItem value="dessert-menu">
                       Dessert & Hot Drinks Menu
                     </DropdownMenuRadioItem>
                   </Link>

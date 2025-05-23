@@ -38,6 +38,15 @@ const Navbar = ({
     setIsOpen(!isOpen);
   };
 
+  const [positiondn, setPositiondn] = useState(() => {
+    if (pathname.includes("main-menu")) return "main-menu";
+    if (pathname.includes("takeout-menu")) return "takeout-menu";
+    if (pathname.includes("kids-menu")) return "kids-menu";
+    if (pathname.includes("drinks-menu")) return "drinks-menu";
+    if (pathname.includes("dessert-menu")) return "dessert-menu";
+    return "";
+  });
+
   return (
     <nav
       className={cn(
@@ -89,7 +98,7 @@ const Navbar = ({
             >
               Order Online
             </Link>
-            <DropdownMenu>
+            {/* <DropdownMenu>
               <DropdownMenuTrigger asChild className="cursor-pointer">
                 <div
                   className={
@@ -128,6 +137,52 @@ const Navbar = ({
                   </Link>
                   <Link href="/dessert-menu">
                     <DropdownMenuRadioItem value="lunch">
+                      Dessert & Hot Drinks Menu
+                    </DropdownMenuRadioItem>
+                  </Link>
+                </DropdownMenuRadioGroup>
+              </DropdownMenuContent>
+            </DropdownMenu> */}
+
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild className="cursor-pointer">
+                <div
+                  className={
+                    pathname === "/menu"
+                      ? "pt-4 text-center font-manrope text-sm font-[600] uppercase tracking-[2px] text-[#000]"
+                      : "pt-4 text-center font-manrope text-sm font-[600] uppercase tracking-[2px] text-[#fff]"
+                  }
+                >
+                  Menus
+                </div>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="mt-4 w-56 rounded-none border-[#CDAE64] bg-[#000] hover:cursor-pointer">
+                <DropdownMenuRadioGroup
+                  value={positiondn}
+                  onValueChange={setPositiondn}
+                >
+                  <Link href="/main-menu">
+                    <DropdownMenuRadioItem value="main-menu">
+                      Main Menu
+                    </DropdownMenuRadioItem>
+                  </Link>
+                  <Link href="/takeout-menu">
+                    <DropdownMenuRadioItem value="takeout-menu">
+                      Takeout Menu
+                    </DropdownMenuRadioItem>
+                  </Link>
+                  <Link href="/kids-menu">
+                    <DropdownMenuRadioItem value="kids-menu">
+                      Kids Menu
+                    </DropdownMenuRadioItem>
+                  </Link>
+                  <Link href="/drinks-menu">
+                    <DropdownMenuRadioItem value="drinks-menu">
+                      Drinks & Cocktail Menu
+                    </DropdownMenuRadioItem>
+                  </Link>
+                  <Link href="/dessert-menu">
+                    <DropdownMenuRadioItem value="dessert-menu">
                       Dessert & Hot Drinks Menu
                     </DropdownMenuRadioItem>
                   </Link>
